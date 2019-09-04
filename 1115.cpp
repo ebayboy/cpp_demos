@@ -1,12 +1,13 @@
 #include <iostream>
 
+/* global */
 using namespace std;
 
 int g = 50;
 
 int add(int a, int b)
 {
-	return a + b;
+	return a + b + g;
 }
 
 int main(int argc, char **argv)
