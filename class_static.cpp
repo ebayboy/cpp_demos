@@ -43,6 +43,10 @@ class Box {
 int Box::objCount = 0;
 
 int main() {
+	
+	/* 静态成员在没有实例对象也能正常调用 */ 
+	cout << "Box::objCount : " << Box::objCount << endl;
+	
 	Box b1(1.0, 2.0, 5.0);
 	
 	cout << "Box::objCount : " << Box::objCount << endl;
