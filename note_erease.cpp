@@ -136,14 +136,14 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 	memset(*out, 0, ilen + 1);
 	tmp = *out;
 
-	printf("%s:%d ilen:%d in:[%s] olen:%d *out:[%s]\n", __func__, __LINE__, ilen, in, *olen, *out);
-
 	while(ch < in + ilen) {
-		printf("%s:%d process: ch[%c] state:%d\n", __func__, __LINE__, *ch, state);
+		//printf("%s:%d process: ch[%c] state:%d\n", __func__, __LINE__, *ch, state);
 
 		/*×´Ì¬0µÄ×´Ì¬ÇÐ»»*/
 		if(state==STATE_0 && *ch == comp_states[STATE_1]) {
 			state = STATE_1;
+			ch++;
+			continue;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_5]) {
 			state = STATE_5;
 			*tmp++ = *ch;
@@ -156,7 +156,6 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			state = STATE_9;
 			ch++;
 			continue;
-			/* TODO ? */
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_10]) {
 			state = STATE_10;
 			ch++;
@@ -168,8 +167,14 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 		} else if(state ==STATE_10 && *ch !=comp_states[STATE_11]) {
 			state = STATE_0;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_14]) {
-			/* TODO ? */
-		} else if(state==STATE_1 && *ch ==comp_states[STATE_2]) {
+			state = STATE_14;
+			ch++;
+			continue;
+		} 
+		
+		/* ================= BEFORE STATE ENTRANCE ==================== */
+		
+		else if(state==STATE_1 && *ch ==comp_states[STATE_2]) {
 			/* state entrace */
 			state = STATE_2;
 		} else if(state==STATE_1 && *ch ==comp_states[STATE_3]) {
@@ -213,23 +218,28 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 		} else if (state == STATE_0) {
 			*tmp++ = *ch;
 			count++;
-			printf("%s:%d ch=[%c],state=%d *olen:%d *out:[%s]\n", __func__, __LINE__, *ch, state, count, *out);
+			//printf("%s:%d ch=[%c],state=%d *olen:%d *out:[%s]\n", __func__, __LINE__, *ch, state, count, *out);
 			ch++;
 			continue;
-		} else if(state == STATE_9 && *ch == '\n') {
+		}
+
+		/* 9-> 10 */
+		else if(state == STATE_9 && *ch == '\n') {
 			state = STATE_0;
 			*tmp++ = '\n';
 		} else if (state == STATE_9) {
 			state == STATE_9;
-		} else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
+		}
+		/* 10 -> 11 */
+		else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
 			state = STATE_11;
 			ch++;
 			continue;
 		} else if(state ==STATE_10 && *ch != comp_states[STATE_11]) {
 			state = STATE_0;
-		} 
+		}
 		/* 11 -> 12 */
-		else if(state ==STATE_11 && (*ch == comp_states[STATE_12]) || *ch == comp_states[STATE_13])  {
+		else if(state ==STATE_11 && (*ch == comp_states[STATE_12] || *ch == comp_states[STATE_13]))  {
 			if (*ch == comp_states[STATE_12]) {
 				state = STATE_12;
 			} else {
@@ -239,8 +249,21 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			continue;
 		} else if(state ==STATE_11 && *ch != comp_states[STATE_12] && *ch != comp_states[STATE_13]) {
 			state = STATE_0;
-		} 
-		
+		}
+
+		/* 14 -> 15 */
+		else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
+			state = STATE_15;
+			ch++;
+			continue;
+		} else if(state ==STATE_14 && *ch != comp_states[STATE_1]) {
+			state = STATE_0;
+			ch++;
+			continue;
+		}
+
+
+		/* 12 -> 13 */
 		else if ((state == STATE_12 || state == STATE_13)&& *ch == '\n') {
 			state = STATE_0;
 			*tmp++ = '\n';
@@ -249,10 +272,62 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			continue;
 		}
 
-		else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
-			/* TODO */
+		/* 15 -> 16 */
+		else if(state ==STATE_15 && *ch == comp_states[STATE_16]) {
+			state = STATE_16;
+			ch++;
+			continue;
+		} else if(state ==STATE_15 && *ch != comp_states[STATE_16]) {
+			state = STATE_0;
+			ch++;
+			continue;
 		}
-		/* ================= BEFORE STATE ENTRANCE ==================== */
+
+		/* 16 -> 17 */
+		/* 15 -> 16 */
+		else if(state ==STATE_16 && *ch == comp_states[STATE_17]) {
+			state = STATE_17;
+			ch++;
+			continue;
+		} else if(state ==STATE_16 && *ch != comp_states[STATE_17]) {
+			state = STATE_0;
+			ch++;
+			continue;
+		}
+
+		/* 17 -> 18 */
+		else if(state ==STATE_17 && *ch == comp_states[STATE_18]) {
+			state = STATE_18;
+			ch++;
+			continue;
+		} else if(state ==STATE_17 && *ch != comp_states[STATE_18]) {
+			ch++;
+			continue;
+		}
+
+		/* 18-> 19 */
+		else if(state ==STATE_18 && *ch == comp_states[STATE_19]) {
+			state = STATE_19;
+			ch++;
+			continue;
+		} else if(state ==STATE_18 && *ch != comp_states[STATE_19]) {
+			state = STATE_17;
+			ch++;
+			continue;
+		}
+
+		/* 19->20 */
+		else if(state ==STATE_19 && *ch == comp_states[STATE_20]) {
+			state = STATE_0;
+			ch++;
+			continue;
+		} else if(state ==STATE_19 && *ch != comp_states[STATE_20]) {
+			state = STATE_17;
+			ch++;
+			continue;
+		}
+
+
 
 		else if(state == STATE_2 && *ch == '\n') {
 			state = STATE_0;
@@ -283,24 +358,6 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			state = STATE_5;
 			*tmp++ = *ch;
 			count++;
-
-			/*×´Ì¬7µÄÇÐ»»*/
-		} else if(state ==STATE_11 && *ch == comp_states[STATE_12]) {
-			/* TODO */
-		} else if(state ==STATE_11 && *ch == comp_states[STATE_13]) {
-			/* TODO */
-		} else if(state ==STATE_13) {
-			/* TODO */
-		} else if(state ==STATE_15 && *ch == comp_states[STATE_16]) {
-			/* TODO */
-		} else if(state ==STATE_16 && *ch == comp_states[STATE_17]) {
-			/* TODO */
-		} else if(state ==STATE_17 && *ch == comp_states[STATE_18]) {
-			/* TODO */
-		} else if(state ==STATE_18 && *ch == comp_states[STATE_19]) {
-			/* TODO */
-		} else if(state ==STATE_19 && *ch == comp_states[STATE_20]) {
-			/* TODO */
 		} else {
 			*tmp++ = *ch;
 			count++;
