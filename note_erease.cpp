@@ -151,6 +151,7 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			*tmp++ = *ch;
 			count++;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_9]) {
+			state = STATE_9;
 			/* TODO ? */
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_10]) {
 			/* TODO */
@@ -203,12 +204,13 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			printf("%s:%d ch=[%c],state=%d *olen:%d *out:[%s]\n", __func__, __LINE__, *ch, state, count, *out);
 			ch++;
 			continue;
-		}
-
-		else if(state ==STATE_9 && *ch == comp_states[STATE_8]) {
-			/*×´Ì¬9µÄÇÐ»»*/
-			/* TODO */
-		} else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
+		} else if(state == STATE_9 && *ch == '\n') {
+            state = STATE_0;
+            *tmp++ = '\n';
+		} else if (state == STATE_9) {
+			state == STATE_9;
+		} 
+		else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
 			/* TODO */
 		} else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
 			/* TODO */
