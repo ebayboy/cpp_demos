@@ -114,13 +114,14 @@ static int comp_paras_check_note_need_todo(const char *in, int ilen) {
 static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *olen) {
 	const char *ch = NULL;
 	char *tmp = NULL;
-	int icount = 0, ocount = 0;
+	int icount = 0;
 	int state = STATE_0;
+	int count = 0;
 
 	if (in == NULL || ilen == 0 ) {
 		return 0;
 	}
-	
+
 	ch = in;
 
 	if (comp_paras_check_repeat_need_todo(in, ilen) == 0) {
@@ -131,43 +132,93 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 	if ((*out = (char *)malloc(ilen + 1)) == NULL) {
 		return -1;
 	}
+	memset(*out, 0, ilen + 1);
 	tmp = *out;
 
-	while(icount < ilen) {
+	printf("ilen:%d in:[%s] olen:%d *out:[%s]\n", ilen, in, *olen, *out);
 
+	while(ch < in + ilen) {
+		
 		/*×´Ì¬0µÄ×´Ì¬ÇÐ»»*/
 		if(state==STATE_0 && *ch == comp_states[STATE_1]) {
 			state = STATE_1;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_5]) {
 			state = STATE_5;
 			*tmp++ = *ch;
+			count++;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_7]) {
 			state = STATE_7;
 			*tmp++ = *ch;
+			count++;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_9]) {
 			/* TODO ? */
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_10]) {
 			/* TODO */
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_14]) {
 			/* TODO ? */
-		} else if(state==STATE_0) {
-			state = STATE_0;
-			*tmp++ = *ch;
-
-			/*×´Ì¬1µÄ×´Ì¬ÇÐ»»*/
 		} else if(state==STATE_1 && *ch ==comp_states[STATE_2]) {
+			/* state entrace */
 			state = STATE_2;
 		} else if(state==STATE_1 && *ch ==comp_states[STATE_3]) {
 			state = STATE_3;
 		} else if(state==STATE_1) {
 			state = STATE_0;
 			*tmp++ = '/';   /* ±ÈÈç 5/3 µÄÇé¿ö */
+			count++;
 			*tmp++ = *ch;
+			count++;
 
 			/*×´Ì¬2µÄÇÐ»»*/
-		} else if(state == STATE_2 && *ch == '\n') {
+		} else if(state == STATE_5 && *ch == comp_states[STATE_6]) {
+			state = STATE_6;
+			*tmp++ = *ch;
+			count++;
+		} else if(state == STATE_5 && *ch == '\'') {
+			state = STATE_0;
+			*tmp++ = *ch;
+			count++;
+		} else if(state == STATE_5) {
+			state = STATE_5;
+			*tmp++ = *ch;
+			count++;
+
+			/*×´Ì¬6ÇÐ»»*/
+		}  else if(state == STATE_7 && *ch == comp_states[STATE_8]) {
+			state = STATE_8;
+			*tmp++ = *ch;
+			count++;
+		} else if(state == STATE_7 && *ch =='\"') {
+			state = STATE_0;
+			*tmp++ = *ch;
+			count++;
+		} else if(state == STATE_7) {
+			state = STATE_7;
+			*tmp++ = *ch;
+			count++;
+			
+			/*×´Ì¬8µÄÇÐ»»*/
+		} else if (state == STATE_0) {
+			*tmp++ = *ch;
+			count++;
+			printf("%s:%d ch=[%c],state=%d *olen:%d *out:[%s]\n", __func__, __LINE__, *ch, state, count, *out);
+			ch++;
+			continue;
+		}
+
+		else if(state ==STATE_9 && *ch == comp_states[STATE_8]) {
+			/*×´Ì¬9µÄÇÐ»»*/
+			/* TODO */
+		} else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
+			/* TODO */
+		} else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
+			/* TODO */
+		}
+		/* ================= BEFORE STATE ENTRANCE ==================== */
+
+		else if(state == STATE_2 && *ch == '\n') {
 			state = STATE_0;
 			*tmp++ = '\n';
+			count++;
 		} else if(state == STATE_2) {
 			state == STATE_2;
 
@@ -184,50 +235,22 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			state = STATE_3;
 
 			/*×´Ì¬5ÇÐ»»*/
-		} else if(state == STATE_5 && *ch == comp_states[STATE_6]) {
-			state = STATE_6;
-			*tmp++ = *ch;
-		} else if(state == STATE_5 && *ch == '\'') {
-			state = STATE_0;
-			*tmp++ = *ch;
-		} else if(state == STATE_5) {
-			state = STATE_5;
-			*tmp++ = *ch;
-
-			/*×´Ì¬6ÇÐ»»*/
-		} else if(state == STATE_6) {
-			state = STATE_5;
-			*tmp++ = *ch;
-
-			/*×´Ì¬7µÄÇÐ»»*/
-		} else if(state == STATE_7 && *ch == comp_states[STATE_8]) {
-			state = STATE_8;
-			*tmp++ = *ch;
-		} else if(state == STATE_7 && *ch =='\"') {
-			state = STATE_0;
-			*tmp++ = *ch;
-		} else if(state == STATE_7) {
-			state = STATE_7;
-			*tmp++ = *ch;
-
-			/*×´Ì¬8µÄÇÐ»»*/
 		} else if(state ==STATE_8 ) {
 			state = STATE_7;
 			*tmp++ = *ch;
-		}
-
-		/*×´Ì¬9µÄÇÐ»»*/
-		else if(state ==STATE_9 && *ch == comp_states[STATE_8]) {
-			/* TODO */
-		} else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
-			/* TODO */
+			count++;
+			
+		} else if(state == STATE_6) {
+			state = STATE_5;
+			*tmp++ = *ch;
+			count++;
+			
+			/*×´Ì¬7µÄÇÐ»»*/
 		} else if(state ==STATE_11 && *ch == comp_states[STATE_12]) {
 			/* TODO */
 		} else if(state ==STATE_11 && *ch == comp_states[STATE_13]) {
 			/* TODO */
 		} else if(state ==STATE_13) {
-			/* TODO */
-		} else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
 			/* TODO */
 		} else if(state ==STATE_15 && *ch == comp_states[STATE_16]) {
 			/* TODO */
@@ -239,14 +262,17 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			/* TODO */
 		} else if(state ==STATE_19 && *ch == comp_states[STATE_20]) {
 			/* TODO */
-		} 
+		} else {
+			*tmp++ = *ch;
+			count++;
+		}
 
-		//printf("c=%c,state=%d\n",ch,state);
+		printf("ch=[%c],state=%d, olen:%d *out:[%s]\n", *ch, state, count, *out);
+
+		ch++;
 	}
-
-	*tmp = '\0';
-
-	*olen = ocount;
+	
+	*olen = count;
 
 	return 0;
 }
@@ -277,7 +303,7 @@ static int comp_paras_check_repeat_need_todo(const char *in, int ilen) {
 }
 
 /* FUNCTION: check have var repeat */
-static int comp_paras_check_repeat(const char *in, int ilen) {
+static int comp_paras_check_repeat(const char *in, int ilen, char **out, int *olen) {
 
 	return 0;
 }
@@ -285,6 +311,13 @@ static int comp_paras_check_repeat(const char *in, int ilen) {
 /* ¸´ºÏ²ÎÊýÒýÇæ Compound parameter engine */
 int comp_paras_check(const char *in, int ilen, char **out, int *olen) {
 
+	if (comp_paras_check_note_do(in,  ilen, out, olen) == -1) {
+		return -1;
+	}
+
+	if (comp_paras_check_repeat(in,  ilen, out, olen) == -1) {
+		return -1;
+	}
 
 	return 0;
 }
@@ -298,20 +331,25 @@ int main(int arg,char **argv) {
 	char *out = NULL;
 	int olen = 0;
 
+	printf("in:[%s]\n========================== IN END ============================\n", in);
+
+
 	if (comp_paras_check(in, ilen, &out, &olen) == -1) {
+		printf("Error: %s:%d\n", __func__, __LINE__);
 		free(in);
 		return -1;
 	}
-
-	if (olen > 0) {
-		printf("out: [%s]\n",out);
-	}
-
+	
 	if (in) {
 		free(in);
 	}
 
+	printf("olen :%d out:[%s]\n", olen, out);
+	
+	printf("\n========================== OUT END ============================\n", in);
+
 	if (olen > 0 && out) {
+		printf("olen:%d out:[%s]\n]", olen, out);
 		free(out);
 	}
 
