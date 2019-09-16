@@ -227,16 +227,24 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			continue;
 		} else if(state ==STATE_10 && *ch != comp_states[STATE_11]) {
 			state = STATE_0;
-		} else if(state ==STATE_11 && *ch == comp_states[STATE_12]) {
-			state = STATE_12;
+		} 
+		/* 11 -> 12 */
+		else if(state ==STATE_11 && (*ch == comp_states[STATE_12]) || *ch == comp_states[STATE_13])  {
+			if (*ch == comp_states[STATE_12]) {
+				state = STATE_12;
+			} else {
+				state = STATE_13;
+			}
 			ch++;
 			continue;
-		} else if(state ==STATE_11 && *ch != comp_states[STATE_12]) {
+		} else if(state ==STATE_11 && *ch != comp_states[STATE_12] && *ch != comp_states[STATE_13]) {
 			state = STATE_0;
-		} else if (state == STATE_12 && *ch == '\n') {
+		} 
+		
+		else if ((state == STATE_12 || state == STATE_13)&& *ch == '\n') {
 			state = STATE_0;
 			*tmp++ = '\n';
-		} else if (state == STATE_12 && *ch != '\n') {
+		} else if ((state == STATE_12 || state == STATE_13)&& *ch != '\n') {
 			ch++;
 			continue;
 		}
