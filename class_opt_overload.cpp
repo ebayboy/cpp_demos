@@ -12,18 +12,20 @@ class Box {
 		Box(int l=10);
 		int getLength();
 		void setLength(int x);
+		
+		/* 一元操作重载 */ 
 		Box operator+(const Box &b);
 		bool operator<(const Box &b);
+		
+		/* 自增运算符 */ 
 		Box operator++ ();
 		Box operator++ (int);
 		
-		/* output opt overload */
+		/* 友缘 输入/输出运算符 */ 
 		friend ostream &operator << (ostream &output, const Box &b) {
 			output << "Length:" << b.length << endl;
 			return output;
 		}
-		
-		/* input opt overload */
 		friend istream &operator >> (istream &input, Box b) {
 			input >> b.length;
 			return input;
@@ -35,7 +37,7 @@ Box::Box(int l) {
 	length = l;
 }
 
-/* operator+ */
+/* 一元操作符: operator+ */
 Box Box::operator+(const Box &b) {
 	Box box;
 
@@ -44,7 +46,7 @@ Box Box::operator+(const Box &b) {
 	return box;
 }
 
-/* operation < */
+/* 一元操作符:  operation < */
 bool Box::operator<(const Box &b) {
 	if (this->length < b.length) {
 		return true;
@@ -53,13 +55,13 @@ bool Box::operator<(const Box &b) {
 	return false;
 }
 
-/* 重载前缀 */
+/* 重载前缀++ */
 Box Box::operator++ () {
 	++this->length;
 	return *this;
 }
 
-/* 重载后缀 */
+/* 重载后缀++ */
 Box Box::operator++ (int) {
 	Box temp = *this;
 
