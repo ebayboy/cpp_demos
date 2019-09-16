@@ -223,7 +223,7 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			state == STATE_2;
 
 			/*状态3的切换*/
-		} else if(state == STATE_3 && *ch == comp_states[STATE_4]) {
+		} else if((state == STATE_3 || state == STATE_4) && *ch == comp_states[STATE_4]) {
 			state = STATE_4;
 		} else if(state == STATE_3) {
 			state = STATE_3;
@@ -326,12 +326,13 @@ int main(int arg,char **argv) {
 	char ch;
 	int  state    = STATE_0;
 
-	char *in = textFileRead((char *)"./test.cpp");
+	char *in = textFileRead((char *)"./1.txt");
 	int ilen = strlen(in);
 	char *out = NULL;
 	int olen = 0;
 
-	printf("in:[%s]\n========================== IN END ============================\n", in);
+	printf("ilen:%d in:[%s]\n", ilen, in);
+	printf("========================== IN END ============================\n");
 
 
 	if (comp_paras_check(in, ilen, &out, &olen) == -1) {
@@ -361,12 +362,15 @@ static char* textFileRead(const char* filename) {
 	FILE *pf = fopen(filename,"r");
 	fseek(pf,0,SEEK_END);
 	long lSize = ftell(pf);
+	
+	printf("lSize:%d\n", lSize);
 
 	// 用完后需要将内存free掉
 	text=(char*)malloc(lSize+1);
+	memset(text, 0, lSize+1);
+
 	rewind(pf);
 	fread(text,sizeof(char),lSize,pf);
-	text[lSize] = '\0';
 
 	return text;
 }
