@@ -103,6 +103,7 @@ static int comp_paras_check_note_need_todo(const char *in, int ilen) {
 		        || state == STATE_5
 		        || state == STATE_7
 		        || state == STATE_9
+		        || state == STATE_10
 		        || state == STATE_14) {
 			return 1;
 		}
@@ -135,10 +136,11 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 	memset(*out, 0, ilen + 1);
 	tmp = *out;
 
-	printf("ilen:%d in:[%s] olen:%d *out:[%s]\n", ilen, in, *olen, *out);
+	printf("%s:%d ilen:%d in:[%s] olen:%d *out:[%s]\n", __func__, __LINE__, ilen, in, *olen, *out);
 
 	while(ch < in + ilen) {
-		
+		printf("%s:%d process: ch[%c] state:%d\n", __func__, __LINE__, *ch, state);
+
 		/*状态0的状态切换*/
 		if(state==STATE_0 && *ch == comp_states[STATE_1]) {
 			state = STATE_1;
@@ -152,9 +154,19 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			count++;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_9]) {
 			state = STATE_9;
+			ch++;
+			continue;
 			/* TODO ? */
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_10]) {
-			/* TODO */
+			state = STATE_10;
+			ch++;
+			continue;
+		} else if(state ==STATE_10 && *ch ==comp_states[STATE_11]) {
+			state = STATE_11;
+			ch++;
+			continue;
+		} else if(state ==STATE_10 && *ch !=comp_states[STATE_11]) {
+			state = STATE_0;
 		} else if(state ==STATE_0 && *ch ==comp_states[STATE_14]) {
 			/* TODO ? */
 		} else if(state==STATE_1 && *ch ==comp_states[STATE_2]) {
@@ -196,7 +208,7 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			state = STATE_7;
 			*tmp++ = *ch;
 			count++;
-			
+
 			/*状态8的切换*/
 		} else if (state == STATE_0) {
 			*tmp++ = *ch;
@@ -205,14 +217,31 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			ch++;
 			continue;
 		} else if(state == STATE_9 && *ch == '\n') {
-            state = STATE_0;
-            *tmp++ = '\n';
+			state = STATE_0;
+			*tmp++ = '\n';
 		} else if (state == STATE_9) {
 			state == STATE_9;
-		} 
-		else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
-			/* TODO */
-		} else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
+		} else if(state ==STATE_10 && *ch == comp_states[STATE_11]) {
+			state = STATE_11;
+			ch++;
+			continue;
+		} else if(state ==STATE_10 && *ch != comp_states[STATE_11]) {
+			state = STATE_0;
+		} else if(state ==STATE_11 && *ch == comp_states[STATE_12]) {
+			state = STATE_12;
+			ch++;
+			continue;
+		} else if(state ==STATE_11 && *ch != comp_states[STATE_12]) {
+			state = STATE_0;
+		} else if (state == STATE_12 && *ch == '\n') {
+			state = STATE_0;
+			*tmp++ = '\n';
+		} else if (state == STATE_12 && *ch != '\n') {
+			ch++;
+			continue;
+		}
+
+		else if(state ==STATE_14 && *ch == comp_states[STATE_15]) {
 			/* TODO */
 		}
 		/* ================= BEFORE STATE ENTRANCE ==================== */
@@ -241,12 +270,12 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			state = STATE_7;
 			*tmp++ = *ch;
 			count++;
-			
+
 		} else if(state == STATE_6) {
 			state = STATE_5;
 			*tmp++ = *ch;
 			count++;
-			
+
 			/*状态7的切换*/
 		} else if(state ==STATE_11 && *ch == comp_states[STATE_12]) {
 			/* TODO */
@@ -273,7 +302,7 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 
 		ch++;
 	}
-	
+
 	*olen = count;
 
 	return 0;
@@ -296,6 +325,7 @@ static int comp_paras_check_repeat_need_todo(const char *in, int ilen) {
 		        || state == STATE_5
 		        || state == STATE_7
 		        || state == STATE_9
+		        || state == STATE_10
 		        || state == STATE_14) {
 			return 1;
 		}
@@ -342,13 +372,13 @@ int main(int arg,char **argv) {
 		free(in);
 		return -1;
 	}
-	
+
 	if (in) {
 		free(in);
 	}
 
 	printf("olen :%d out:[%s]\n", olen, out);
-	
+
 	printf("\n========================== OUT END ============================\n", in);
 
 	if (olen > 0 && out) {
@@ -364,7 +394,7 @@ static char* textFileRead(const char* filename) {
 	FILE *pf = fopen(filename,"r");
 	fseek(pf,0,SEEK_END);
 	long lSize = ftell(pf);
-	
+
 	printf("lSize:%d\n", lSize);
 
 	// 用完后需要将内存free掉
