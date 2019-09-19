@@ -20,10 +20,8 @@ class Shape {
 			height = b;
 		}
 		
-		int area() {
-			cout << "area:" << endl;
-			return 0;
-		}
+		/* 虚函数 */ 
+		virtual int area() = 0;		
 };
 
 class Rectangle: public Shape {
@@ -52,6 +50,9 @@ int main()
 {
 	Rectangle r(5, 10);
 	Triangle t(5, 10);
+	
+	/* 带虚函数的基类不能被实例化 */ 
+	// Shape s(1, 5);
 	
 	cout << r.area() << endl;
 	cout << t.area() << endl;
