@@ -10,7 +10,7 @@ class Box {
 
 	public:
 		Box(int l=10);
-		
+
 		int getLength();
 		void setLength(int x);
 
@@ -30,14 +30,14 @@ class Box {
 		/* 函数调用运算符()重载 */
 		Box operator() (int x, int y, int z) {
 			Box b(0);
-			
+
 			b.length +=x;
 			b.length *=y;
 			b.length -=z;
-			
+
 			return b;
 		}
-		 
+
 		/* 友员 输入/输出运算符 */
 		friend ostream &operator << (ostream &output, const Box &b) {
 			output << "Length:" << b.length << endl;
@@ -122,9 +122,10 @@ int main() {
 	Box d = b;
 
 	cout << "d: " << d << endl;
-	
+
 	Box e = b(10, 2, 5); /* (0 + 10)*2 - 5 = 15 */
 	cout << "e: " << e << endl;
 
 	return 0;
 }
+
