@@ -11,41 +11,41 @@ static int comp_paras_check_repeat_need_todo(const char *in, int ilen);
 static char* textFileRead(const char* filename);
 
 enum {
-    /* COMMON Code Note, include MYSQL/XSS/C ... */
-    STATE_0 = 0,  /*正常状态*/
-    STATE_1,  /* /  */    /* XSS + MYSQL + 其他 */
-    STATE_2, /* //  */
-    STATE_3,  /* *  */  /* XSS + MYSQL + 其他 */
-    STATE_4,  /* * */
-    STATE_5,  /* '  单引号字符开始 */
-    STATE_6,  /* '\  单引号\字符 */
-    STATE_7,  /* "  双引号字符串开始 */
-    STATE_8,  /* "\  双引号\换行或者字符 */
+	/* COMMON Code Note, include MYSQL/XSS/C ... */
+	STATE_0 = 0,  /*正常状态*/
+	STATE_1,  /* /  */    /* XSS + MYSQL + 其他 */
+	STATE_2, /* //  */
+	STATE_3,  /* *  */  /* XSS + MYSQL + 其他 */
+	STATE_4,  /* * */
+	STATE_5,  /* '  单引号字符开始 */
+	STATE_6,  /* '\  单引号\字符 */
+	STATE_7,  /* "  双引号字符串开始 */
+	STATE_8,  /* "\  双引号\换行或者字符 */
 
-    /**
-     *  MYSQL Code Note # 注释单行后面的内容
-     *  MYSQL Code NOte -- 注释单行后面的内容
-     *  XSS Code Note --> 注释单行后面的内容
-     **/
-    STATE_9,  /* # MYSQL单行注释后面内容 */
+	/**
+	 *  MYSQL Code Note # 注释单行后面的内容
+	 *  MYSQL Code NOte -- 注释单行后面的内容
+	 *  XSS Code Note --> 注释单行后面的内容
+	 **/
+	STATE_9,  /* # MYSQL单行注释后面内容 */
 
-    /* STATE_10 */
-    STATE_10,  /* - MYSQL && XSS 单行注释后面内容 */
-    STATE_11,  /* - MYSQL && XSS 单行注释后面内容 */
-    STATE_12,  /* space MYSQL 单行注释后面内容 */
-    STATE_13,  /* > XSS 单行注释后面内容 */
+	/* STATE_10 */
+	STATE_10,  /* - MYSQL && XSS 单行注释后面内容 */
+	STATE_11,  /* - MYSQL && XSS 单行注释后面内容 */
+	STATE_12,  /* space MYSQL 单行注释后面内容 */
+	STATE_13,  /* > XSS 单行注释后面内容 */
 
-    /* XSS Code Note */
-    /* STATE_31 */
-    STATE_14, /* < */
-    STATE_15, /* !  */
-    STATE_16, /* -  */
-    STATE_17, /* -  */
-    STATE_18, /* -  */
-    STATE_19, /* -  */
-    STATE_20, /* >  */
+	/* XSS Code Note */
+	/* STATE_31 */
+	STATE_14, /* < */
+	STATE_15, /* !  */
+	STATE_16, /* -  */
+	STATE_17, /* -  */
+	STATE_18, /* -  */
+	STATE_19, /* -  */
+	STATE_20, /* >  */
 
-    STATE_MAX
+	STATE_MAX
 };
 
 char comp_states[STATE_MAX + 1] = {
@@ -100,11 +100,11 @@ static int comp_paras_check_note_need_todo(const char *in, int ilen) {
 	for (i = 0; i < ilen; i++ ) {
 		state = comp_paras_note_state_hit(in[i]);
 		if ( state == STATE_1
-		        || state == STATE_5
-		        || state == STATE_7
-		        || state == STATE_9
-		        || state == STATE_10
-		        || state == STATE_14) {
+				|| state == STATE_5
+				|| state == STATE_7
+				|| state == STATE_9
+				|| state == STATE_10
+				|| state == STATE_14) {
 			return 1;
 		}
 	}
@@ -171,9 +171,9 @@ static int comp_paras_check_note_do(const char *in, int ilen, char **out, int *o
 			ch++;
 			continue;
 		} 
-		
+
 		/* ================= BEFORE STATE ENTRANCE ==================== */
-		
+
 		else if(state==STATE_1 && *ch ==comp_states[STATE_2]) {
 			/* state entrace */
 			state = STATE_2;
@@ -387,11 +387,11 @@ static int comp_paras_check_repeat_need_todo(const char *in, int ilen) {
 	for (i = 0; i < ilen; i++ ) {
 		state = comp_paras_note_state_hit(in[i]);
 		if ( state == STATE_1
-		        || state == STATE_5
-		        || state == STATE_7
-		        || state == STATE_9
-		        || state == STATE_10
-		        || state == STATE_14) {
+				|| state == STATE_5
+				|| state == STATE_7
+				|| state == STATE_9
+				|| state == STATE_10
+				|| state == STATE_14) {
 			return 1;
 		}
 	}
