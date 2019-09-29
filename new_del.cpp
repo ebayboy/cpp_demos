@@ -13,7 +13,7 @@ int main() {
 
 	cout << "pvalue: " << *pvalue << endl;
 
-	//delete pvalue;
+	delete pvalue;
 
 	return 0;
 }
