@@ -27,8 +27,11 @@ int main(int argc, char **argv)
 
 	signal(SIGINT, signalHandler);
 
-	while(1) {
-		cout << "going to sleep ..." << endl;
+	for (int i = 0;;i++) {
+		cout << "i: "<< i << " going to sleep ..." << endl;
+		if (i == 3) {
+			raise(SIGINT);
+		}
 		sleep(1);
 	}
 
