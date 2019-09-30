@@ -13,7 +13,6 @@
 
 using namespace std;
 
-
 void signalHandler(int signum)
 {
 	cout << "Interrupt signal (" << signum << endl;
@@ -25,11 +24,14 @@ int main(int argc, char **argv)
 {
 	cout<<"start ok!"<<endl;
 
+	/** sigal **/
 	signal(SIGINT, signalHandler);
 
 	for (int i = 0;;i++) {
 		cout << "i: "<< i << " going to sleep ..." << endl;
 		if (i == 3) {
+
+			/** raise func **/
 			raise(SIGINT);
 		}
 		sleep(1);
