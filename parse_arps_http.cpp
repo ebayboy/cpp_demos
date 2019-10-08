@@ -46,6 +46,10 @@ int parse_args(const char *in, int ilen, char **out, size_t *olen)
 		tmp = NULL;
 	}
 
+	if (pairslist.size() == 0) {
+		return 0;
+	}
+
 	/* parse key-values */
 	map <string, string> kvs;
 	map <string, string>::iterator it_kv;
@@ -61,8 +65,13 @@ int parse_args(const char *in, int ilen, char **out, size_t *olen)
 		}
 	}
 
+	if (kvs.size() == 0) {
+		return 0;
+	}
+
 	size_t len = 0;
-	for (map<string,string>::iterator it = kvs.begin(); it != kvs.end(); it++) {
+	for (map<string,string>::iterator it = kvs.begin(); 
+			it != kvs.end(); it++) {
 		len += it->first.size();
 		len += it->second.size();
 		len += 2; /* & = */
