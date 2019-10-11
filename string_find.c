@@ -8,65 +8,158 @@
 #include<string.h>
 #include <time.h>
 #include <sys/time.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-char *strings[33] = { 
-	"all",
-	"select",
-	"as",
-	"top"
-	"concat",
-	"join",
-	"left",
-	"right",
-	"from",
-	"where",
-	"on",
-	"like",
-	"between",
-	"insert",
-	"into",
-	"values",
-	"delete",
-	"update",
-	"drop",
-	"sleep",
-	"and",
-	"or",
-	"DISTINCT",
-	"ALTER",
-	"CREATE",
-	"TRIGGER",
-	"SET",
-	"DECLARE",
-	"FETCH",
-	"PREPARE",
-	"EXECUTE",
-	"DESCRIBE",
-	"end"
-};
+#define STRS_MAX 128
+#define STRS_LEN_MAX 64
 
-int find_str_in_strs(char **strings, char *value)
+char *str_to_lower(char* string, size_t  slen)
+{
+    int i;
+
+    if (string == NULL || slen == 0) {
+        return NULL;
+    }   
+
+    for (i = 0; i < slen; i++)
+    {   
+        if (string[i] >= 'A' && string[i] <= 'Z')
+        {   
+            string[i] = string[i] + 32; 
+        }   
+    }    
+
+    return string;
+} 
+
+static char *sqlkeys[STRS_MAX] = {0};
+
+static size_t sqlkeys_len[STRS_MAX] ={0};
+
+static void sqlkeys_show(void)
+{
+    int i;
+
+    for (i=0; i<STRS_MAX; i++) {
+        if(sqlkeys[i] && sqlkeys_len[i] > 0) {
+            printf("index:%d len:[%d] sqlkeys[%s]\n",
+                    i, sqlkeys_len[i], sqlkeys[i]);
+        }
+    }
+}
+
+static void sqlkeys_fini(void)
+{
+    int i;
+
+    for (i = 0; i < STRS_MAX; i++) {
+        if (sqlkeys[i]) {
+            free(sqlkeys[i]);
+            sqlkeys[i] = NULL;
+        }
+    }
+}
+
+static void sqlkeys_init(void)
+{
+    int i = 0;
+
+#define STRS_SET_STR(x) \
+    do {    \
+        if (i < STRS_MAX) {    \
+            sqlkeys[i] = (char *)malloc(strlen(#x) + 1);    \
+            if (sqlkeys[i]) {   \
+                strcpy(sqlkeys[i], #x);       \
+                str_to_lower(sqlkeys[i], strlen(#x));   \
+                sqlkeys_len[i++] = strlen(#x);   \
+            }   \
+        }   \
+    } while(0);
+
+    STRS_SET_STR(union);
+    STRS_SET_STR(all);
+    STRS_SET_STR(select);
+    STRS_SET_STR(as);
+    STRS_SET_STR(top);
+    STRS_SET_STR(concat);
+    STRS_SET_STR(join);
+    STRS_SET_STR(left);
+    STRS_SET_STR(right);
+    STRS_SET_STR(from);
+    STRS_SET_STR(where);
+    STRS_SET_STR(on);
+    STRS_SET_STR(like);
+    STRS_SET_STR(between);
+    STRS_SET_STR(insert);
+    STRS_SET_STR(into);
+    STRS_SET_STR(delete);
+    STRS_SET_STR(update);
+    STRS_SET_STR(drop);
+    STRS_SET_STR(sleep);
+    STRS_SET_STR(and);
+    STRS_SET_STR(or);
+    STRS_SET_STR(distinct);
+    STRS_SET_STR(alter);
+    STRS_SET_STR(create);
+    STRS_SET_STR(trigger);
+    STRS_SET_STR(set);
+    STRS_SET_STR(declare);
+    STRS_SET_STR(fetch);
+    STRS_SET_STR(prepare);
+    STRS_SET_STR(execute);
+    STRS_SET_STR(describe);
+
+#undef STRS_SET_STR
+}
+   
+int find_str_casein_strs(char *sqlkeys[], size_t ksize, char *value, size_t vlen)
 {
 	char *string;     //字符串循环变量
 	char *parValue;   //和value一样，只是易于回归
-	while ((string = *strings++)!= NULL)
-	{
+    int i, j;
+
+    for (i = 0; i < ksize; i++) 
+    {
+        string = sqlkeys[i];
 		parValue = value;
 
-		while (*string != '\0' && *parValue != '\0')  //两个字符串均未结束
-		{
-			if (*string != *parValue) 
-			{
-				break;
-			} 
-			else if ((*string++ == *parValue++) 
-					&& (*string == '\0' && *parValue == '\0'))   
-			{
-				//两个字符串一致并且字符串中有一方结束
-				return 1;
-			}
-		}
-	}
+        if (string == NULL) 
+        {
+            break;
+        }
+
+        /* check length equal */
+        if (sqlkeys_len[i] != vlen) 
+        {
+            continue;
+        }
+
+        /* check bytes equal */
+        for (j = 0; j < vlen; j++) 
+        {
+            if (parValue[j] >= 'a' && parValue[j] <= 'z') {
+                if (string[j] != parValue[j]) { 
+                    break;
+                }
+                if (j == vlen - 1) {
+                    /* compare over */
+                    return 1;
+                }
+            } else if (parValue[j] >= 'A' && parValue[j] <= 'Z') {
+                if (string[j] != parValue[j] + 32) {
+                    break;
+                }
+                if (j == vlen - 1) {
+                    /* compare over */
+                    return 1;
+                }
+            } else {
+                /* not sql key words */
+                break;
+            }
+        }
+    }
 
 	return 0;
 }
@@ -80,7 +173,7 @@ long long get_time_now()
 
 int main()
 {
-	char *text = "She said some groups have shown willingness to conduct dialogue with the government and reiterated the priority is to end violence and restore order in Hong Kong as soon as possible";
+	char *text = "She said some groups have shown willingness to conduct dialogue with the government AnD reiterated the priority is to end violence and restore order in Hong Kong as soon as possible";
 
 	char payload[512] = {0};
 
@@ -88,16 +181,29 @@ int main()
 
 	long long st = get_time_now();
 
-	for (int i = 0; i < 100000; i++) {
+    int i, hit;
+
+    /* init */
+    sqlkeys_init();
+
+    sqlkeys_show();
+
+	for (i = 0; i < 1; i++) {
 		strcpy(payload, text);
 		p = strtok(payload, " ");
 		while(p) {
-			find_str_in_strs(strings, p);
+            hit = find_str_casein_strs(sqlkeys, STRS_MAX, p, strlen(p));
+            if (hit == 1) {
+                printf("p=%s %d\n", p, hit);
+            }
 			p = strtok(NULL, " ");
 		}
 	}
 
-	printf("use time:%llu(us)\n", get_time_now() - st);
+	printf("i=%d use time:%llu(us)\n", i, get_time_now() - st);
+
+    /* fini */
+    sqlkeys_fini();
 
 	return 0;
 }
