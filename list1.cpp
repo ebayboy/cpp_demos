@@ -48,6 +48,8 @@ void list_char()
 
 int main()
 {
+	cout << "hello world!" << endl;
+
 	list_int();
 
 	list_char();
