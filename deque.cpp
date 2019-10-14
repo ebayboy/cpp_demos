@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 	
 	cout << "clear all:" << endl;
 	d.clear();
-	show_deque(d))
+	show_deque(d);
 
 	return 0;
 }
