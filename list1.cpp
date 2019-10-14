@@ -13,12 +13,12 @@ void list_int()
 	list<int>::iterator i;
 	
 	//从前面向listOne容器中添加数据
-	listOne.puh_front(1);
+	listOne.push_front(1);
 	listOne.push_front(2);
 
 	//从后面向listOne容器中添加数据
 	listOne.push_back(3);
-	listOne.puh_back(4);
+	listOne.push_back(4);
 
 	//从前向后显示listOne中的数据
 	
