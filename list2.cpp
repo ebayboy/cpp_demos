@@ -99,6 +99,7 @@ int main(int argc, char **argv)
 	showlist(l1, "l1");
 	showlist(l3, "l3");
 
+	//append l3 l1.end 
 	l1.splice(l1.end(), l3);
 	showlist(l1, "l1");
 	showlist(l3, "l3");
