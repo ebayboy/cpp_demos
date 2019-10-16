@@ -43,9 +43,6 @@ void set_showr(set<int> s)
 
 int main(int argc, char **argv)
 {
-
-    cout<<"hello world!"<<endl;
-
     set<int> s;
 
     for(int i = 0; i <5; i++)
@@ -54,8 +51,16 @@ int main(int argc, char **argv)
     }
 
 	set_show(s, "set s:");
-
 	set_showr(s);
+
+	s.erase(2);
+	set_show(s, "after earase 2, s:");
+
+	set<int>::iterator it;
+	it = s.find(3);
+	if (it != s.end()) {
+		cout << "find it: " << *it << endl;
+	}
 
 	cout << "size: " << s.size() << endl;
 	cout << "max_size: " << s.max_size() << endl;
