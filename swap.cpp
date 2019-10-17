@@ -29,12 +29,18 @@ void show(vector<int> v, std::string msg)
 int main(int argc, char **argv)
 {
 	vector<int> v1 = { 1,2,3};
-	vector<int> v2 = { 4,5,6};
+	vector<int> v2 = { 4,5,6,7,8};
 
 	show(v1, "v1:");
 	show(v2, "v2:");
 
+#if 0
+	//交换v1，v2
 	std::swap(v1, v2);
+#else
+	//交换v1 和 v2->begin() )+ 2开始的元素
+	std::swap_ranges(v1.begin(), v1.end(), v2.begin() + 2);
+#endif
 
 	show(v1, "v1:");
 	show(v2, "v2:");
