@@ -17,22 +17,34 @@ using namespace std;
 
 #define DEBUG 
 
+void show(vector<int> v)
+{
+	for_each(v.begin(), v.end(), [](auto i){ cout << i << " "; });
+	cout << endl;
+}
+
 int main(int argc, char **argv)
 {
 	vector<int> v1 = { 1,2,3,4,5 };
 	vector<int> v2(v1.size());
+	vector<int> v3(v1.size());
+
+	//show v3
+	show(v3);
 
 	//show v1
-	for_each(v1.begin(), v1.end(), [](auto i){ cout << i << " "; });
-	cout << endl;
+	show(v1);
 
+	//一元变换
 	//v1 transform -> v2
 	std::transform(v1.begin(), v1.end(), v2.begin(), [](int it){ return it + 1; });
+	show(v2);
 
+	//二元变换
+	//transform v1, v2 -> v3(v1 + v2)
+	std::transform(v1.begin(), v1.end(), v2.begin(), v3.begin(), [](int a, int b){ return a + b; });
+	show(v3);
 
-	//show v2
-	for_each(v2.begin(), v2.end(), [](auto i){ cout << i << " "; });
-	cout << endl;
 
 	return 0;
 }
