@@ -29,9 +29,6 @@ bool op(int e)
 
 int main(int argc, char **argv)
 {
-
-	cout<<"hello world!"<<endl;
-
 	vector<int> v = { 1,2,3,4,5,6};
 
 	cout << std::count_if(v.begin(), v.end(), op) << endl;
