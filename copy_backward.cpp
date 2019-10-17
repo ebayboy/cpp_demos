@@ -20,7 +20,7 @@ using namespace std;
 
 void show(vector<int> v)
 {
-	for (int i = 0; i < v.size(); i++) {
+	for (size_t i = 0; i < v.size(); i++) {
 		cout << v[i] << " ";
 	}
 	cout << endl;
@@ -30,6 +30,12 @@ int main(int argc, char **argv)
 {
     vector<int> v1 = {1,2,3};
 	vector<int> v2 = {4,5};
+	show (v2);
+
+	v2.resize(v2.size() + v1.size());
+	show (v2);
+
+	std::copy_backward(v1.begin(), v1.end(), v2.end());
 
 	show(v2);
 
