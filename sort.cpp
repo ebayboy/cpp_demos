@@ -32,12 +32,26 @@ int main(int argc, char **argv)
 
 	//sort by self function
 	vector<int> v1 = {4, 5, 1, 2, 3};
+#if 0
+
 	std::sort(std::begin(v1), std::end(v1), [](int a, int b){ 
 			if(a > b) {
 				return 1;
 			}
 			return 0;
 	});
+
+#else
+
+	//stable edition
+	std::stable_sort(std::begin(v1), std::end(v1), [](int a, int b){ 
+			if(a > b) {
+				return 1;
+			}
+			return 0;
+	});
+
+#endif
 
 	SHOW_VEC(v1, "v1");
 
