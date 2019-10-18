@@ -19,11 +19,7 @@ using namespace std;
 
 void show(vector<int> v)
 {
-    std::for_each(std::begin(v), std::end(v), [](int i)
-    {
-        cout << i << " ";
-    });
-
+    std::for_each(std::begin(v), std::end(v), [](int i) { cout << i << " "; }); 
     cout << endl;
 }
 
