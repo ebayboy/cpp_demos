@@ -55,6 +55,12 @@ int main(int argc, char **argv)
 
 	SHOW_VEC(v1, "v1");
 
+	//partial sort
+	vector<int> v2 = { 4,5, 1, 3, 2};
+	SHOW_VEC(v2, "v2");
+	std::partial_sort(std::begin(v2), std::begin(v2) + 2, std::end(v2));
+	SHOW_VEC(v2, "v2");
+	
 	return 0;
 }
 
