@@ -42,9 +42,8 @@ int main(int argc, char **argv)
         return false;
     });
     show(v);
-
-#if 1
 	cout << endl;
+
     vector<int> v1 = { 1,2,3,4,5 };
 	show(v1);
 
@@ -58,7 +57,6 @@ int main(int argc, char **argv)
         return false;
     });
 	show(v1);
-#endif
 
     return 0;
 }
