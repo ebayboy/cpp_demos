@@ -27,8 +27,11 @@ int main(int argc, char **argv)
 	set<int> result;
 
 	//求两个集合的差:  s1 - s2 = result
+#if 1
 	std::set_difference(std::begin(s1), std::end(s1), std::begin(s2), std::end(s2), std::inserter(result, std::begin(result)));
-
+#else
+	std::set_symmetric_difference(std::begin(s1), std::end(s1), std::begin(s2), std::end(s2), std::inserter(result, std::begin(result)));
+#endif
 	SHOW_VEC(result);
 
 	return 0;
