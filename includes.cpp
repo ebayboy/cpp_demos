@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 #include <numeric>
-#include <vector>
+#include <set>
 #include <algorithm>
 
 using namespace std;
@@ -19,8 +19,8 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	vector<int> v1 = { 1,2,3,4,5 }; 
-	vector<int> v2 = { 2,3,4 }; 
+	set<int> v1 = { 1,2,3,4,5 }; 
+	set<int> v2 = { 2,3,4 }; 
 
 	auto ret = std::includes(v1.begin(), v1.end(), v2.begin(), v2.end());
 	cout << ret << endl;
