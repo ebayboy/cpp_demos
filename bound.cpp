@@ -21,13 +21,19 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	vector<int> v = { 1, 3, 5 , 7, 9 };
+	vector<int> v = { 1, 3, 5 ,5, 5, 5, 7, 9 };
 
 	SHOW_VEC(v);
 
-	//返回第一个大于等于value的元素位置, v是有序的
-	auto it = std::lower_bound(std::begin(v), std::end(v), 7);
-	cout << *it << endl;
+	//返回第一个小于等于value的元素位置, v是有序的
+	vector<int>::iterator it = std::lower_bound(std::begin(v), std::end(v), 5);
+	cout << "lower_bound at index: " << it - std::begin(v) << endl;
+	cout << "item: " << *it << endl;
+
+	//返回第一个大于value的元素位置
+	vector<int>::iterator it1 = std::upper_bound(std::begin(v), std::end(v), 5);
+	cout << endl << "upper_bound at index: " << it1 - std::begin(v) << endl;
+	cout << "item: " << *it1 << endl;
 
 	return 0;
 }
