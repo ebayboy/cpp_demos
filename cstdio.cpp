@@ -7,13 +7,9 @@
 @Copyright (c)  all right reserved 
 **************************************************************************/
 
-#include <iostream>
-#include <string>
-#include <numeric>
-#include <vector>
-#include <algorithm>
-
 #include <cstdio>
+#include <cctype>
+
 
 using namespace std;
 
@@ -33,6 +29,9 @@ int main(int argc, char **argv)
 
 	c = getchar();
 	printf("c=[%c]\n", c);
+
+	char d = 'd';
+	printf("toupper(d)=%c tolower(d))\n", toupper(d), tolower(d));
 
 	return 0;
 }
