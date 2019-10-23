@@ -9,7 +9,7 @@
 
 #include <cstdio>
 #include <cctype>
-
+#include <cstdlib> //exit qsort
 
 using namespace std;
 
@@ -31,7 +31,9 @@ int main(int argc, char **argv)
 	printf("c=[%c]\n", c);
 
 	char d = 'd';
-	printf("toupper(d)=%c tolower(d))\n", toupper(d), tolower(d));
+	printf("toupper(d)=%c tolower(d):%c)\n", toupper(d), tolower(d));
+
+	exit(0);
 
 	return 0;
 }
