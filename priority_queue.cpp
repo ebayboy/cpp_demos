@@ -22,14 +22,18 @@ int main(int argc, char **argv)
 {
 	cout<<"hello world!"<<endl;
 
+#if 1
 	std::priority_queue< int, std::vector<int>, std::greater<int> > pq;
+#else
+	std::priority_queue< int, std::vector<int>> pq;
+#endif
 
 	pq.push(3);
 	pq.push(5);
 	pq.push(1);
 
 	while(!pq.empty()) {
-		cout << "size: " << pq.size() << "top: " << pq.top() << endl;
+		cout << "size: " << pq.size() << " top: " << pq.top() << endl;
 		pq.pop();
 	}
 
