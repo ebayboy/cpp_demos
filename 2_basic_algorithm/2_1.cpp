@@ -33,7 +33,7 @@ static void test_2_1_1()
 	}
 }
 
-//2. 
+//2. 白鸡问题
 static void test_2_1_2()
 {
 	int x, y, z;
@@ -49,6 +49,27 @@ static void test_2_1_2()
 	}
 }
 
+//3. 求水仙花数
+static void test_2_1_3()
+{
+	int sum = 0, temp = 0;
+
+	cout << __func__ << endl;
+	for (int x=1; x <= 9; x++ )	{
+		for (int y = 0; y <=9; y++) {
+			for (int z = 0; z <=9; z++) {
+				temp = x*100 + y*10 + z;
+				sum = x*x*x + y*y*y + z*z*z;
+				if (temp == sum) {
+					cout << sum << " ";
+				}
+			}
+		}
+	}
+
+	cout << endl;
+}
+
 int main(int argc, char **argv)
 {
 	clock_t start;
@@ -59,6 +80,10 @@ int main(int argc, char **argv)
 
 	start = clock();
 	test_2_1_2();
+	cout << "use " << clock() - start << " ms" << endl;
+
+	start = clock();
+	test_2_1_3();
 	cout << "use " << clock() - start << " ms" << endl;
 
 	return 0;
