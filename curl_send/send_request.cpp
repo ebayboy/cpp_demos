@@ -132,7 +132,7 @@ int main(int argc, char **argv)
                        "\"match\": [],"	\
                        "\"resp\": [],"	\
                        "\"from\": 0,"	\
-                       "\"size\": 1 }";
+                       "\"size\": 5 }";
 
 	FILE *fp = NULL;
 
