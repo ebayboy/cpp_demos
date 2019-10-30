@@ -122,7 +122,7 @@ out:
 	return ret;
 }
 
-int main()
+int main(int argc, char **argv)
 {
     string url="http://logeye.jdcloud.com/api/v2/search";
     string post_data = "{"	\
@@ -143,7 +143,7 @@ int main()
 		return -1;
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		if (SendPost(url, post_data, fp) != 0) 
 		{
