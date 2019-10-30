@@ -1,0 +1,8 @@
+
+build.sh -- build script
+run.sh -- pull data from deep log , then get request_uri by jq filter
+fmt.json -- format json of ./send_request'result output.json
+fmt_req.txt -- jq .data.size && jq.data.request_uri
+send_request.cpp -- source code , pull data from deeplog.
+
+
