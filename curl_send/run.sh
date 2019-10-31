@@ -20,9 +20,9 @@ rm -rf $1 && mkdir $1 && cd $1
 
 ../send_request $1 $2
 
-cat output.json | jq . > fmt.json || exit 1
+#cat output.json | jq . > fmt.json || exit 1
 
-OUTTXT=fmt_req.txt
+#OUTTXT=fmt_req.txt
 
 SIZE=`jq .size fmt.json`
 for ((i=0; i<$SIZE;i++))
