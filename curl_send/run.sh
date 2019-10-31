@@ -11,7 +11,9 @@
 #* 
 #**************************************************************************/ 
 
-./send_request || exit 1
+rm -rf $1 && mkdir $1 && cd $1
+
+../send_request $1 $2
 
 cat output.json | jq . > fmt.json || exit 1
 rm output.json && ls -alF *.json
