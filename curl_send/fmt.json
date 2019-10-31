@@ -1,0 +1,408 @@
+{
+  "code": 0,
+  "message": "success",
+  "total": 985147,
+  "size": 100,
+  "data": [
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://oc.124zhe.com/ware/handy_edit/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://op.ry-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://op.ry-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://op.ry-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://plds.szchengji-inc.com/ware/ware/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://plds.szchengji-inc.com/ware/ware/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://plds.szchengji-inc.com/ware/ware/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://zndz.124zhe.com/material/tpl/preview"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://plds.szchengji-inc.com/ware/ware/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://zndz.124zhe.com/material/tpl/preview"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://zndz.124zhe.com/material/tpl/save_tpl"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://oc.124zhe.com/ware/handy_edit/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://plds.szchengji-inc.com/ware/ware/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://op.ry-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://plds.szchengji-inc.com/ware/ware/saveEditWareInfo"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://op.ry-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10230",
+      "request_uri": "http://oc.124zhe.com/ware/handy_edit/rebuildEditWareIntroduction"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://op.ry-inc.com/order/purchase_order/save_purchase_order_info"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10111",
+      "request_uri": "http://157.255.51.49/?payload=<script>alert(/xss/)</script>"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10007",
+      "request_uri": "http://157.255.51.49/"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/update_purchase_order"
+    },
+    {
+      "waf_hit_id": "10000",
+      "request_uri": "http://order.chengji-inc.com/order/purchase_order/save_purchase_order_info"
+    }
+  ]
+}

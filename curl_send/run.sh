@@ -11,25 +11,24 @@
 #* 
 #**************************************************************************/ 
 
+if (($# < 2));then
+	echo "Usage: $0 date times $#"
+	exit 1
+fi
+
 rm -rf $1 && mkdir $1 && cd $1
 
 ../send_request $1 $2
 
 cat output.json | jq . > fmt.json || exit 1
-rm output.json && ls -alF *.json
 
 OUTTXT=fmt_req.txt
-PREV_LINES=`cat $OUTTXT | wc -l`	
 
 SIZE=`jq .size fmt.json`
 for ((i=0; i<$SIZE;i++))
 do
 	jq .data[$i].request_uri fmt.json >> $OUTTXT
 done
-
-SUFF_LINES=`cat $OUTTXT | wc -l`	
-
-echo "PREV_LINES:$PREV_LINES SUFF_LINES:$SUFF_LINES"
 
 exit 0
 

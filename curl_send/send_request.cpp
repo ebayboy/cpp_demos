@@ -143,17 +143,18 @@ int main(int argc, char **argv)
 	string resp = "\"resp\":[\"request_uri\", \"waf_hit_id\"],";
 	string size = "\"size\": 100";
 
-	string match = "\"match\": [ { \"regexp\" : { \"waf_hit_id\" : [\"10000|10007|10015|10016|10017|10019|10028|10029|10030|10031|10044|10045|10056|10057|10073|10091|10092|10093|10095|10096|10110|10111|10112|10113|10125|10126|10127|10129|10134|10135|10146|10196|10215|10230|10260\"]} }], ";
-
-	fp = fopen("output.json", "w+");
-	if (fp == NULL) 
-	{
-		DP("Error: open file!");
-		return -1;
-	}
+	string match = "\"match\": [ { \"regexp\" : { \"waf_hit_id\" : [\"10000|10007|10015|10016|10017|10019|10028|10029|10030|10031|10044|10045|10056|10057|10073|10091|10092|10093|10095|10096|10110|10111|10112|10113|10125|10126|10127|10129|10134|10135|10146|10196|10215|10230|10260\"]}, \"regexp\" : {\"request_uri\" : [\".*\\\\?.*\"]} }], ";
 
 	for (int i = 0; i < loops; i++)
 	{
+		string ofile = date + "." + std::to_string(i);
+		fp = fopen(ofile.c_str(), "w+");
+		if (fp == NULL) 
+		{
+			DP("Error: open file!");
+			return -1;
+		}
+
 		string from = "\"from\":" + std::to_string(i*100) + ",";
 		string post_data = "{" + uuid + appName + timeRange + match + resp + from + size + "}";
 
@@ -164,11 +165,14 @@ int main(int argc, char **argv)
 			DP("Error: SendPost!");
 		}
 		DP("Send: %d ok!", i);
-	}
 
-	if (fp)
-	{
-		fclose(fp);
+		if (fp)
+		{
+			fclose(fp);
+		}
+
+		string cmd = "cat " + ofile + " | jq . > " + ofile + ".fmt";
+		system(cmd.c_str());
 	}
 
     return 0;
