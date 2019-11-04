@@ -136,9 +136,6 @@ int main(int argc, char **argv)
 	string date = argv[1];
 	int loops = atoi(argv[2]);
 
-	string cmd = "rm -rf " + date + " && mkdir "+ date +" && cd "+ date;
-	system(cmd.c_str());
-
 	string uuid = "\"uuid\": \"87556c6688ce49a9bcd5950b226fdc01\",";
 	string appName = "\"appName\": [\"jsec-sgw-logserver\"],";
 
@@ -174,13 +171,18 @@ int main(int argc, char **argv)
 			fclose(fp);
 		}
 
-		cmd = "cat " + ofile + " | jq . > " + ofile + ".fmt";
+		string cmd = "cat " + ofile + " | jq . > " + ofile + ".fmt";
 		system(cmd.c_str());
 
-		cmd = "for ((i=0; i<`jq .size "+ ofile + ".fmt`;i++))\n";
+		cmd = "/bin/bash << EOF\n";
+		cmd += "for ((i=0; i<`jq .size "+ ofile + ".fmt`;i++))\n";
 		cmd += "do\n";
 		cmd += "jq .data[$i].request_uri "+ ofile + ".fmt >> request_uri.txt\n";
 		cmd += "done\n";
+		cmd += "EOF\n";
+
+		DP("cmd:[%s]", cmd.c_str());
+
 		system(cmd.c_str());
 	}
 

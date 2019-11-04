@@ -24,11 +24,11 @@ rm -rf $1 && mkdir $1 && cd $1
 
 #OUTTXT=fmt_req.txt
 
-SIZE=`jq .size fmt.json`
-for ((i=0; i<$SIZE;i++))
-do
-	jq .data[$i].request_uri fmt.json >> $OUTTXT
-done
+#SIZE=`jq .size fmt.json`
+#for ((i=0; i<$SIZE;i++))
+#do
+#	jq .data[$i].request_uri fmt.json >> $OUTTXT
+#done
 
 exit 0
 
