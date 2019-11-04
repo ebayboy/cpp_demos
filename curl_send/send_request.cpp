@@ -20,7 +20,7 @@ using namespace std;
 
 #endif
 
-void ParseResFile(string fname, string ofile)
+int ParseResFile(string fname, string ofile)
 {
     ifstream ifs; //标准输入流
     ifs.open(fname.c_str());
@@ -32,31 +32,30 @@ void ParseResFile(string fname, string ofile)
     //从ifs中读取数据到jsonRoot
     if (!parseFromStream(builder, ifs, &root, &errs))
     {
-        return;
+        return -1;
     }
-
-    FILE *fp = fopen(ofile.c_str(), "a+");
-	if (fp == NULL)
-	{
-		DP("Error: fopen!");
-		return;
-	}
 
     //读取根节点信息
     int code = root["code"].asInt();
     string message = root["message"].asString();
     int total = root["total"].asInt();
     int size = root["size"].asInt();
+    int status = root["status"].asInt();
+    string error = root["error"].asString();
 
-	if (code == -1) 
+	DP("code = %d!", code);
+	DP("status = %d!", status);
+
+	if (code != 0 || status == 400 || error.size() > 0) 
 	{
-		DP("code = -1!");
-		exit(-1);
+		DP("code = %d status:%d error:%s", code, status, error.c_str());
+		return -1;
 	}
+
 	if (size == 0) 
 	{
 		DP("read size==0, exit!");
-		exit(0);
+		return -1;
 	}
 
     cout << "code:" << code << endl;
@@ -64,6 +63,12 @@ void ParseResFile(string fname, string ofile)
     cout << "total:" << total << endl;
     cout << "size:" << size << endl;
 
+	FILE *fp = fopen(ofile.c_str(), "a+");
+	if (fp == NULL)
+	{
+		DP("Error: fopen!");
+		return -1;
+	}
     //读取数组信息
     cout << "Data:" << endl;
     Json::Value dataItem;
@@ -83,6 +88,8 @@ void ParseResFile(string fname, string ofile)
 	{
 		fclose(fp);
 	}
+
+	return 0;
 }
 
 static size_t ncWriteFile(void* buffer, size_t size, size_t nmemb, void* lpVoid)
@@ -197,25 +204,32 @@ int main(int argc, char **argv)
 
     if (argc < 3)
     {
-        DP("Usage: $0 date fetch_loops! argc:[%d]", argc);
+        DP("Usage: $0 date_from date_to ! argc:[%d]", argc);
         return -1;
     }
 
-    string date = argv[1];
-    int loops = atoi(argv[2]);
+    string date_from = argv[1];
+    string date_to = argv[2];
+	int loops = 0;
 
     string uuid = "\"uuid\": \"87556c6688ce49a9bcd5950b226fdc01\",";
     string appName = "\"appName\": [\"jsec-sgw-logserver\"],";
 
-    string timeRange = "\"timeRange\": {\"start\" : \"" + date + " 00:00:00\"" + ", \"end\" : \"" + date + " 23:59:59\"},";
+    string timeRange = "\"timeRange\": {\"start\" : \"" + date_from + "\"" + ", \"end\" : \"" + date_to + "\"},";
     string resp = "\"resp\":[\"request_uri\", \"waf_hit_id\"],";
     string size = "\"size\": 100";
 
-    string match = "\"match\": [ { \"regexp\" : { \"waf_hit_id\" : [\"10000|10007|10015|10016|10017|10019|10028|10029|10030|10031|10044|10045|10056|10057|10073|10091|10092|10093|10095|10096|10110|10111|10112|10113|10125|10126|10127|10129|10134|10135|10146|10196|10215|10230|10260\"]}, \"regexp\" : {\"request_uri\" : [\".*\\\\?.*\"]} }], ";
+    string match = "\"match\": [{ "
+		"\"regexp\" : "
+		"{ \"waf_hit_id\" : [\"10000|10007|10015|10016|10017|10019|10028|10029|10030|10031|10044|10045|10056|10057|10073|10091|10092|10093|10095|10096|10110|10111|10112|10113|10125|10126|10127|10129|10134|10135|10146|10196|10215|10230|10260\"], "
+		"\"request_uri\" : [\".*\\\\?.*\"]} "
+		"}], ";
 
-    for (int i = 0; i < loops; i++)
-    {
-        string ofile = date + "." + std::to_string(i);
+	while(1) 
+	{
+        DP("Sending: %d!", loops);
+
+        string ofile = std::to_string(loops++);
         fp = fopen(ofile.c_str(), "w+");
         if (fp == NULL)
         {
@@ -223,23 +237,27 @@ int main(int argc, char **argv)
             return -1;
         }
 
-        string from = "\"from\":" + std::to_string(i*100) + ",";
+        string from = "\"from\":" + std::to_string(loops*100) + ",";
         string post_data = "{" + uuid + appName + timeRange + match + resp + from + size + "}";
 
-        //DP("post_data:%s", post_data.c_str());
+        DP("post_data:%s", post_data.c_str());
 
         if (SendPost(url, post_data, fp) != 0)
         {
-            DP("Error: SendPost!");
+            DP("Error: SendPost Error!");
+			return -1;
         }
-        DP("Send: %d ok!", i);
 
         if (fp)
         {
             fclose(fp);
         }
 
-        ParseResFile(ofile, date + ".txt");
+        if (ParseResFile(ofile, "res.txt") == -1) 
+		{
+			DP("Error: ParseResFile");
+			return -1;
+		}
     }
 
     return 0;
