@@ -35,23 +35,29 @@ int loadXML(const char *fname)
         return -1;
     }
 
-    for(TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+	//遍历root的子节点
+	//NextSiblingElement获取下一个（兄弟）节点
+    for(TiXmlElement* elem = root->FirstChildElement();
+            elem != NULL;
+            elem = elem->NextSiblingElement())
     {
         string elemName = elem->Value();
+        cout << "elemName: " << elemName << endl;
+
         const char* attr;
         attr = elem->Attribute("priority");
         if(strcmp(attr,"1")==0)
         {
             TiXmlElement* e1 = elem->FirstChildElement("bold");
             TiXmlNode* e2=e1->FirstChild();
-            cout<<"priority=1\t"<<e2->ToText()->Value()<<endl;
+            cout << "priority=1\t" << e2->ToText()->Value() << endl;
 
         }
         else if(strcmp(attr,"2")==0)
         {
 
             TiXmlNode* e1 = elem->FirstChild();
-            cout<<"priority=2\t"<<e1->ToText()->Value()<<endl;
+            cout<< "priority=2\t" << e1->ToText()->Value() << endl;
         }
     }
     doc.Clear();
@@ -67,63 +73,62 @@ int saveXML(char *fname)
     TiXmlElement* root = new TiXmlElement("root");
     doc.LinkEndChild(root);
 
+	//root->element1
     TiXmlElement* element1 = new TiXmlElement("Element1");
     root->LinkEndChild(element1);
-
     element1->SetAttribute("attribute1", "some value");
 
-
+	//root->element2
     TiXmlElement* element2 = new TiXmlElement("Element2");  ///元素
     root->LinkEndChild(element2);
-
     element2->SetAttribute("attribute2", "2");
     element2->SetAttribute("attribute3", "3");
 
-
+	//root->element2->element3
     TiXmlElement* element3 = new TiXmlElement("Element3");
     element2->LinkEndChild(element3);
-
     element3->SetAttribute("attribute4", "4");
 
+	//element2->text
     TiXmlText* text = new TiXmlText("Some text.");  ///文本
     element2->LinkEndChild(text);
 
     int success = doc.SaveFile(fname);
     doc.Clear();
 
-    if(success) 
-	{
+    if(success)
+    {
         return 0;
-	}
+    }
     else
-	{
+    {
         return -1;
-	}
+    }
 
-	return 0;
+    return 0;
 }
 
 int main(int argc, char* argv[])
 {
-	
+
     if(loadXML((char *)"a.xml") == -1)
     {
         cout << "Error: loadXML failed!" << endl;
         return -1;
-    } 
-	else 
-	{
-		cout << "loadXML a.xml ok!" << endl;
-	}
+    }
+    else
+    {
+        cout << "loadXML a.xml ok!" << endl;
+    }
 
-	if (saveXML((char *)"b.xml") == -1)
-	{
-		cout << "Error: saveXML failed!" << endl;
-	} 
-	else
-	{
-		cout << "saveXML b.xml ok!" << endl;
-	}
+    if (saveXML((char *)"b.xml") == -1)
+    {
+        cout << "Error: saveXML failed!" << endl;
+    }
+    else
+    {
+        cout << "saveXML b.xml ok!" << endl;
+    }
 
     return 0;
 }
