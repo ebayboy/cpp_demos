@@ -40,10 +40,9 @@ void sort(int *a, int size)
 	int i, j;
 	int tmp;
 
-	printf("%d\n", *a);
-
+	printf("size:%d\n", size);
 	return;
-	
+
 	for(i = 0; i < size; i++) 
 	{
 		for(j = i + 1; j < size; j++)
@@ -70,7 +69,7 @@ int main(int argc, char **argv)
 	}
 	cout << endl;
 
-	sort((int *)&a, sizeof(a));
+	sort((int *)&a, sizeof(a)/sizeof(int));
 
 	for (auto i : a) {
 		cout << i << " ";
