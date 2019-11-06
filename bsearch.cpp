@@ -35,23 +35,20 @@ int bsearch(int *a, size_t size, int v)
 	return -1;
 }
 
-void sort(int *a, int size)
+void bubble_sort(int *a, int size)
 {
 	int i, j;
 	int tmp;
-
-	printf("size:%d\n", size);
-	return;
 
 	for(i = 0; i < size; i++) 
 	{
 		for(j = i + 1; j < size; j++)
 		{
-			if (*(a + j) > *(a + i)) 
+			if (*(a + j) < *(a + i)) 
 			{
 				printf("before: %d %d\n", *(a + i), *(a + j));
-				tmp = *(a + j);
-				*(a + j) = *(a + i);
+				tmp = *(a + i);
+				*(a + i) = *(a + j);
 				*(a + j) = tmp;
 				printf("after: %d %d\n", *(a + j), *(a + i));
 			}
@@ -69,7 +66,7 @@ int main(int argc, char **argv)
 	}
 	cout << endl;
 
-	sort((int *)&a, sizeof(a)/sizeof(int));
+	bubble_sort((int *)&a, sizeof(a)/sizeof(int));
 
 	for (auto i : a) {
 		cout << i << " ";
