@@ -35,17 +35,26 @@ int bsearch(int *a, size_t size, int v)
 	return -1;
 }
 
-void sort(int *a, size_t size)
+void sort(int *a, int size)
 {
-	size_t i, j;
+	int i, j;
+	int tmp;
 
+	printf("%d\n", *a);
+
+	return;
+	
 	for(i = 0; i < size; i++) 
 	{
 		for(j = i + 1; j < size; j++)
 		{
 			if (*(a + j) > *(a + i)) 
 			{
-				std::swap(*(a + j), *(a + i));
+				printf("before: %d %d\n", *(a + i), *(a + j));
+				tmp = *(a + j);
+				*(a + j) = *(a + i);
+				*(a + j) = tmp;
+				printf("after: %d %d\n", *(a + j), *(a + i));
 			}
 		}
 	}
