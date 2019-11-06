@@ -24,13 +24,16 @@ using namespace std;
 
 int bsearch(int *a, int size, int v)
 {
-    int mid = 0, mode = 0;
+    int mid = 0;
+
+	//mode: 标志位，对进入大或者小的条件判断后，
+	//不再进入相反的判断流程， 以防数组不存在这个元素导致死循环
+	int mode = 0;
 
 	mid  = size/2;
 
     while (mid >= 0 && mid < size)
     {
-		printf("a[%d]=%d mode=%d\n", mid, *(a + mid), mode);
         if (*(a + mid) == v)
         {
             return mid;
