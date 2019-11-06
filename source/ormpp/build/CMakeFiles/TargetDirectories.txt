@@ -1,0 +1,3 @@
+/root/cpp_demos/source/ormpp/build/CMakeFiles/rebuild_cache.dir
+/root/cpp_demos/source/ormpp/build/CMakeFiles/ormpp.dir
+/root/cpp_demos/source/ormpp/build/CMakeFiles/edit_cache.dir
