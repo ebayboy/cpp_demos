@@ -24,21 +24,34 @@ using namespace std;
 
 int bsearch(int *a, int size, int v)
 {
-    int mid = 0;
+    int mid = 0, mode = 0;
+
+	mid  = size/2;
 
     while (mid >= 0 && mid < size)
     {
+		printf("a[%d]=%d mode=%d\n", mid, *(a + mid), mode);
         if (*(a + mid) == v)
         {
             return mid;
         }
-        else if (*(a + mid) < v)
+        else if (*(a + mid) < v) 
         {
+			//mode 1
+			if (mode == 2) {
+				return -1;
+			}
             mid = ((mid + 1) + size)/2;
+			mode = 1;
         }
         else
         {
-            mid = (mid - 1)/2;
+			if (mode == 1) {
+				return -1;
+			}
+			//mode 2
+            mid = mid/2;
+			mode = 2;
         }
     }
 
@@ -67,11 +80,11 @@ void bubble_sort(int *a, int size)
 
 int main(int argc, char **argv)
 {
-    int a[9]= { 2,1,4,5,7,6,3,9,8 };
+    int a[9]= { 2,1,4,5,7,6,9,3,8 };
 
     bubble_sort((int *)&a, sizeof(a)/sizeof(int));
 
-    int pos = bsearch((int*)&a, sizeof(a)/sizeof(int), 6);
+    int pos = bsearch((int*)&a, sizeof(a)/sizeof(int), 3);
     cout << "pos: " << pos << endl;
 
     return 0;
