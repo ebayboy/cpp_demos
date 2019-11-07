@@ -310,11 +310,15 @@ int main(int argc, char **argv)
             fclose(fp);
         }
 
-        if (ParseResFile(ofile, "res.txt") == -1) 
+        if (ParseResFile(ofile, "output.txt") == -1) 
 		{
 			DP("Error: ParseResFile");
 			return -1;
 		}
+
+		string cmd = "rm -rf " + ofile;
+		system(cmd.c_str());
+
 		loops++;
     }
 

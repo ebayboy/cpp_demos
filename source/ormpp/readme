@@ -1,0 +1,13 @@
+
+CMakeLists.txt:
+
+1. install mysql
+	1) 安装mysql /usr/local/mysql 目录下
+	2) 设置环境变量包含include 动态库路径等
+	3) 修改系统文件/etc/ld.so.conf，添加/usr/local/mysql/lib/, 运行ldconfig命令/usr/local/mysql/lib/
+
+
+2. how to build with libormpp.a
+g++ -o unit_test unit_test.hpp ./build/libormpp.a -lmysqlclient
+
+
