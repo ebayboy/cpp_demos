@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ormpp.dir/main.cpp.o"
-  "ormpp.pdb"
-  "ormpp"
+  "libormpp.pdb"
+  "libormpp.a"
 )
 
 # Per-language clean rules from dependency scanning.

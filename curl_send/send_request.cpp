@@ -10,6 +10,16 @@
 
 using namespace std;
 
+typedef struct {
+	string date_to;
+	string date_from;
+	string match;
+	string uuid;
+	string appName;
+	string resp;
+	int size;
+} reqcfg_t;
+
 #ifdef DEBUG
 
 #define DP(format,...) printf(__FILE__ ":%d " #format "\n", __LINE__, ##__VA_ARGS__)
@@ -19,6 +29,37 @@ using namespace std;
 #define DP(fmt, ...)
 
 #endif
+
+#define CFG_SET(cfg, x, v) (cfg)->x = v
+
+int ParseCfgFile(string fname, reqcfg_t *cfg)
+{
+    ifstream ifs; //标准输入流
+    ifs.open(fname.c_str());
+    Json::CharReaderBuilder builder;
+    builder["collectComments"] = false;
+    JSONCPP_STRING errs;
+    Json::Value root;
+	FILE *fp;
+
+    if (!parseFromStream(builder, ifs, &root, &errs))
+    {
+		fclose(fp);
+        return -1;
+    }
+
+	CFG_SET(cfg, date_to, root["date_to"].asString().c_str());
+	CFG_SET(cfg, date_from, root["date_from"].asString().c_str());
+	CFG_SET(cfg, match, root["match"].asString().c_str());
+
+	if (fp)
+	{
+		fclose(fp);
+	}
+
+	return 0;
+}
+
 
 int ParseResFile(string fname, string ofile)
 {
@@ -201,35 +242,27 @@ int main(int argc, char **argv)
 {
     string url="http://logeye.jdcloud.com/api/v2/search";
     FILE *fp = NULL;
-
-    if (argc < 3)
-    {
-        DP("Usage: $0 date_from date_to ! argc:[%d]", argc);
-        return -1;
-    }
-
-    string date_from = argv[1];
-    string date_to = argv[2];
 	int loops = 0;
 
-    string uuid = "\"uuid\": \"87556c6688ce49a9bcd5950b226fdc01\",";
-    string appName = "\"appName\": [\"jsec-sgw-logserver\"],";
+	reqcfg_t cfg;
+	memset(&cfg, 0, sizeof(reqcfg_t));
 
-    string timeRange = "\"timeRange\": {\"start\" : \"" + date_from + "\"" + ", \"end\" : \"" + date_to + "\"},";
-    string resp = "\"resp\":[\"request_uri\", \"waf_hit_id\"],";
-    string size = "\"size\": 100";
+	CFG_SET(&cfg, uuid, "\"87556c6688ce49a9bcd5950b226fdc01\"");
+	CFG_SET(&cfg, appName, "\"jsec-sgw-logserver\"");
+	CFG_SET(&cfg, resp, "\"request_uri\"");
+	cfg.size = 100;
 
-    string match = "\"match\": [{ "
-		"\"regexp\" : "
-		"{ \"waf_hit_id\" : [\"10000|10007|10015|10016|10017|10019|10028|10029|10030|10031|10044|10045|10056|10057|10073|10091|10092|10093|10095|10096|10110|10111|10112|10113|10125|10126|10127|10129|10134|10135|10146|10196|10215|10230|10260\"], "
-		"\"request_uri\" : [\".*\\\\?.*\"]} "
-		"}], ";
+	if (ParseCfgFile("cfg.json", &cfg) == -1) 
+	{
+		DP("Error: ParseCfgFile!");
+		return -1;
+	}
 
 	while(1) 
 	{
         DP("Sending: %d!", loops);
 
-        string ofile = std::to_string(loops++);
+        string ofile = std::to_string(loops);
         fp = fopen(ofile.c_str(), "w+");
         if (fp == NULL)
         {
@@ -237,8 +270,32 @@ int main(int argc, char **argv)
             return -1;
         }
 
-        string from = "\"from\":" + std::to_string(loops*100) + ",";
-        string post_data = "{" + uuid + appName + timeRange + match + resp + from + size + "}";
+        string from = "\"from\":" + std::to_string(loops*100);
+		string timeRange = ",\"timeRange\": {\"start\" : \"" + cfg.date_from + "\"" + ", \"end\" : \"" + cfg.date_to + "\"}";
+
+        string post_data = "{";
+		if (cfg.uuid.size() > 0) {
+			post_data += "\"uuid\":" + cfg.uuid;
+		}
+		if (cfg.appName.size() > 0) {
+			post_data += ",\"appName\":[" + cfg.appName + "]";
+		}
+		if (timeRange.size() > 0) {
+			post_data += timeRange;
+		}
+		if (cfg.match.size() > 0) {
+			post_data += ",\"match\":" + cfg.match;
+		}
+		if (cfg.resp.size() > 0) {
+			post_data += ",\"resp\":[" + cfg.resp + "]";
+		}
+		if (from.size() > 0) {
+			post_data += "," + from;
+		}
+		post_data += ",\"size\":" + std::to_string(cfg.size);
+
+		//end
+		post_data +="}";
 
         DP("post_data:%s", post_data.c_str());
 
@@ -258,6 +315,7 @@ int main(int argc, char **argv)
 			DP("Error: ParseResFile");
 			return -1;
 		}
+		loops++;
     }
 
     return 0;
