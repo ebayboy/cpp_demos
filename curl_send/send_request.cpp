@@ -40,24 +40,28 @@ int ParseCfgFile(string fname, reqcfg_t *cfg)
     builder["collectComments"] = false;
     JSONCPP_STRING errs;
     Json::Value root;
-	FILE *fp;
+	FILE *fp = NULL;
+	int ret = 0;
 
     if (!parseFromStream(builder, ifs, &root, &errs))
     {
-		fclose(fp);
-        return -1;
+        ret = -1;
+		goto out;
     }
 
 	CFG_SET(cfg, date_to, root["date_to"].asString().c_str());
 	CFG_SET(cfg, date_from, root["date_from"].asString().c_str());
 	CFG_SET(cfg, match, root["match"].asString().c_str());
 
+out:
 	if (fp)
 	{
 		fclose(fp);
 	}
 
-	return 0;
+	ifs.close();
+
+	return ret;
 }
 
 
@@ -69,20 +73,27 @@ int ParseResFile(string fname, string ofile)
     builder["collectComments"] = false;
     JSONCPP_STRING errs;
     Json::Value root;
+	int ret = 0;
+	FILE *fp = NULL;
+	int code, total, size , status;
+	string message, error, req;
+	unsigned int i = 0;
+    Json::Value dataItem;
 
     //从ifs中读取数据到jsonRoot
     if (!parseFromStream(builder, ifs, &root, &errs))
     {
-        return -1;
+        ret = -1;
+		goto out;
     }
 
     //读取根节点信息
-    int code = root["code"].asInt();
-    string message = root["message"].asString();
-    int total = root["total"].asInt();
-    int size = root["size"].asInt();
-    int status = root["status"].asInt();
-    string error = root["error"].asString();
+	code = root["code"].asInt();
+	message = root["message"].asString();
+	total = root["total"].asInt();
+	size = root["size"].asInt();
+	status = root["status"].asInt();
+	error = root["error"].asString();
 
 	DP("code = %d!", code);
 	DP("status = %d!", status);
@@ -90,13 +101,15 @@ int ParseResFile(string fname, string ofile)
 	if (code != 0 || status == 400 || error.size() > 0) 
 	{
 		DP("code = %d status:%d error:%s", code, status, error.c_str());
-		return -1;
+		ret = -1;
+		goto out;
 	}
 
 	if (size == 0) 
 	{
 		DP("read size==0, exit!");
-		return -1;
+		ret = -1;
+		goto out;
 	}
 
     cout << "code:" << code << endl;
@@ -104,20 +117,20 @@ int ParseResFile(string fname, string ofile)
     cout << "total:" << total << endl;
     cout << "size:" << size << endl;
 
-	FILE *fp = fopen(ofile.c_str(), "a+");
+	fp = fopen(ofile.c_str(), "a+");
 	if (fp == NULL)
 	{
 		DP("Error: fopen!");
-		return -1;
+		ret = -1;
+		goto out;
 	}
     //读取数组信息
     cout << "Data:" << endl;
-    Json::Value dataItem;
-    for (unsigned int i = 0; i < root["data"].size(); i++)
+    for (i = 0; i < root["data"].size(); i++)
     {
         dataItem = root["data"][i];
         //cout << "waf_hit_id:" << dataItem["waf_hit_id"].asString() << endl;
-		string req = dataItem["request_uri"].asString();
+		req = dataItem["request_uri"].asString();
 		req += "\n";
         //cout << "request_uri:" << req << endl;
 		fwrite(req.c_str(), req.size(), 1, fp);
@@ -125,12 +138,17 @@ int ParseResFile(string fname, string ofile)
     cout << endl;
     cout << "Reading Complete!" << endl;
 
+out:
 	if (fp)
 	{
 		fclose(fp);
 	}
 
-	return 0;
+	if (ifs.is_open()){
+		ifs.close();
+	}
+
+	return ret;
 }
 
 static size_t ncWriteFile(void* buffer, size_t size, size_t nmemb, void* lpVoid)
@@ -194,7 +212,8 @@ int SendPost(string url, string post_data, FILE * fp)
     if (url.size() == 0 ||  post_data.size() == 0 || fp == NULL)
     {
         DP("Error param error!;");
-        return ret;
+		ret = -1;
+		goto out;
     }
 
     curl = curl_easy_init();
@@ -299,7 +318,7 @@ int main(int argc, char **argv)
 
         DP("post_data:%s", post_data.c_str());
 
-        if (SendPost(url, post_data, fp) != 0)
+        if (SendPost(url, post_data, fp) == -1)
         {
             DP("Error: SendPost Error!");
 			return -1;
