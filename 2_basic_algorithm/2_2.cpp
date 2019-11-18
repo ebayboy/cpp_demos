@@ -37,8 +37,9 @@ static void show_map(map<int,int> *m)
 	map<int,int>::iterator i;
 	for (i = m->begin(); i != m->end(); i++)
 	{
-		cout << i->first << ":" << i->second << endl;
+		cout << i->first << ":" << i->second << " ";
 	}
+	cout << endl;
 }
 
 static void map_init(map<int,int> *m)
@@ -59,15 +60,22 @@ static int get_num_count(unsigned int a)
 {
 	if (a > 9) {
 		unsigned int tmp = a/10;
-		unsigned int tmp2 = a - a*(a/10);
+		unsigned int tmp2 = a - 10*(a/10);
 		map<int,int>::iterator iter = m_nums.find(tmp);
 		if (iter != m_nums.end()) {
-			return iter->second + get_num_count(tmp2);
-		}
+			int ret2 = get_num_count(tmp2);
+			if (ret2 > 0) {
+				return iter->second + ret2;
+			}
+		} 
 	} else {
 		map<int,int>::iterator iter = m_nums.find(a);
-		return iter->second;
+		if (iter != m_nums.end()) {
+			return iter->second;
+		}
 	}
+
+	return -1;
 }
 
 #define MAX_NUM 24
@@ -93,17 +101,13 @@ int main(int argc, char **argv)
 		}
 		for (j = 1; ; j++) {
 			b = get_num_count(j);
-			if (b == -1 || b > max) {
-				printf("break:b=%d a=%d j=%d i=%d\n", b, a, j, i);
-				break;
-			}
-			if (a + b > max) {
-				printf("break:b=%d a=%d j=%d i=%d\n", b, a, j, i);
+			if (b == -1) {
 				break;
 			}
 			if (a + b == max) {
-				printf("== :b=%d a=%d j=%d i=%d\n", b, a, j, i);
-				result.insert(std::pair<int, int>(a, b));
+				result.insert(std::pair<int, int>(i, j));
+			} else if (a + b > max) {
+				break;
 			}
 		}
 	}
