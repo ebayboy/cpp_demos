@@ -12,6 +12,9 @@
 #include <numeric>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
 
 using namespace std;
 
