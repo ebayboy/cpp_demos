@@ -1,2 +1,2 @@
-/usr/bin/ar qc libormpp.a  CMakeFiles/ormpp.dir/main.cpp.o
+/usr/bin/ar cr libormpp.a  CMakeFiles/ormpp.dir/main.cpp.o
 /usr/bin/ranlib libormpp.a
