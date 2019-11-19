@@ -25,26 +25,31 @@ void show_array(int *a, int len)
 	cout << endl;
 }
 
-int main(int argc, char **argv)
-{
-	int a[9]= {3 , 1, 5, 4, 6, 2, 7, 9, 8 };
-	show_array((int *)&a, 9);
-
-	return 0;
-}
-
 void bubble_sort(int *a, int len)
 {
 	int i,j;
 	int temp;
 
 	for(i=0;i<len;i++) {
-		for(j=i;j<len;j++) {
-			if(a[j]>a[j+1]) {
+		for(j = i + 1;j< len; j++) {
+			if(a[i]>a[j]) {
+				//swap
 				temp=a[j];
-				a[j]=a[j+1];
-				a[j+1]=temp;
+				a[j]=a[i];
+				a[i]=temp;
 			}
 		}
 	}
 }
+int main(int argc, char **argv)
+{
+	int a[9]= {3 , 1, 5, 4, 6, 2, 7, 9, 8 };
+	show_array((int *)&a, 9);
+
+	bubble_sort((int *)&a, 9);
+
+	show_array((int *)&a, 9);
+
+	return 0;
+}
+
