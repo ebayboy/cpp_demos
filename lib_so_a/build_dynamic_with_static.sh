@@ -11,8 +11,11 @@
 #* 
 #**************************************************************************/ 
 
-gcc -o libmyshare_la.so -L. -ltest -shared
-gcc -o app_share_la main.c -L. -lmyshare_la -ltest -L.
+gcc -c -fPIC test2.c -o test2.o
+
+gcc -shared test2.o -L. -ltest -o libmyshare_la.so
+
+gcc -o app_share_la main2.c -lmyshare_la  -L.
 
 exit 0
 

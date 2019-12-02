@@ -11,7 +11,7 @@
 #* 
 #**************************************************************************/ 
 
-gcc -c -o test_la.o test.c
+gcc -c  -fPIC -o test_la.o test.c
 ar rcs libtest.a test_la.o
 gcc -o app_static main.c -L. -ltest
 
