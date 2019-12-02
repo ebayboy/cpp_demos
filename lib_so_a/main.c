@@ -16,10 +16,10 @@ int main()
 
 	printf("please input a and b\n");
 	scanf("%d %d",&a,&b);
-	printf("The add:%d\n",add(a,b));
-	printf("The sub:%d\n",sub(a,b));
-	printf("The mul:%d\n",mul(a,b));
-	printf("The div:%d\n",div(a,b));
+	printf("The test_add:%d\n",test_add(a,b));
+	printf("The test_sub:%d\n",test_sub(a,b));
+	printf("The test_mul:%d\n",test_mul(a,b));
+	printf("The test_div:%d\n",test_div(a,b));
 
 	return 0;
 }

@@ -2,10 +2,10 @@
 #ifndef _TEST_H_
 #define _TEST_H_
 
-extern int add(int a,int b);
-extern int sub(int a,int b);
-extern int mul(int a,int b);
-extern int div(int a,int b);
+extern int test_add(int a,int b);
+extern int test_sub(int a,int b);
+extern int test_mul(int a,int b);
+extern int test_div(int a,int b);
 
 #endif
 
