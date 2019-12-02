@@ -11,11 +11,11 @@
 #* 
 #**************************************************************************/ 
 
-gcc -c -o test.o.d -fPIC test.c
+gcc -c -o test_ld.o -fPIC test.c
 
-gcc -shared -o libmyshare.so test.o.d
+gcc -shared -o libmyshare.so test_ld.o
 
-gcc -o app_share main.c -L. -lmyshare .
+gcc -o app_share main.c -L. -lmyshare 
 
 exit 0
 

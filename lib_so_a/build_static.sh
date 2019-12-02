@@ -11,10 +11,8 @@
 #* 
 #**************************************************************************/ 
 
-CFLAGS=""
-
-gcc -c $CFLAGS test.c -o test.o.s
-ar rcs libtest.a test.o.s
+gcc -c -o test_la.o test.c
+ar rcs libtest.a test_la.o
 gcc -o app_static main.c -L. -ltest
 
 exit 0
