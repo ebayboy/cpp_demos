@@ -1,5 +1,4 @@
 /* class constructor && desctructor */
-
 #include <iostream>
 
 using namespace std;

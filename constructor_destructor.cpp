@@ -11,7 +11,7 @@ class Line {
 	
 	public:
 		/* constructor */
-		Line(int len, int pns);
+		Line(int len = 3,int pns = 4);
 		
 		/* destructor */
 		~Line(void);
@@ -24,7 +24,7 @@ class Line {
 };
 
 #if 1
-Line::Line(int len,int pns)
+Line::Line(int len ,int pns)
 {
 	cout << "constrctor" << endl;
 	
@@ -76,5 +76,9 @@ int main()
 	cout << "length: " << l.getLength() << endl;
 	cout << "points: " << l.getPoints() << endl;
 	
+	Line l2;
+	cout << "length:" << l2.getLength() << endl;
+	cout << "points:" << l2.getPoints() << endl;
+
 	return 0;
  } 
