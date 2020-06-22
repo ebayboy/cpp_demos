@@ -1,12 +1,9 @@
 /* class_protect.class */
 
-/* ÅÉÉúÀàÍ¨¹ı»ùÀàµÄpublicº¯Êı·ÃÎÊ»ùÀàµÄË½ÓĞ³ÉÔ± */ 
-
 #include <iostream>
 #include <cstring>
 
 using namespace std;
-
 
 /* ================  CLASS BOX ================== */
 class Box
@@ -48,6 +45,7 @@ double SmallBox::getSmallWidth()
 
 void SmallBox::setSmallWidth(double wid)
 {
+	//set box protected width
 	width = wid;
 }
 
@@ -66,15 +64,14 @@ int main()
 
 	SmallBox small;
 	
-	/* ·ÃÎÊË³Ğò  ÅÉÉúÀàpublicº¯Êı -> »ùÀàpublic³ÉÔ± */ 
 	small.setSmallWidth(5.0);
 	cout << "SmallWidth:" << small.getSmallWidth() << endl;
 	
-	/* ·ÃÎÊË³Ğò ÅÉÉúÀàpublicº¯Êı -> »ùÀàpublicº¯Êı -> »ùÀàprivate³ÉÔ±  */ 
+	/* ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½publicï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½publicï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½privateï¿½ï¿½Ô±  */ 
 	small.setSmallHeight(11.01); 
 	cout << "getSmallHeight:" << small.getSmallHeight() << endl;
 	
-	/* »ùÀà·ÃÎÊ */ 
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */ 
 	Box box;
 	box.setHeight(15.01);
 	cout << "Box height:" << box.getHeight() << endl;

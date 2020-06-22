@@ -1,11 +1,5 @@
-/****************************************************************************
-@file:accumulate.cpp 
-@author:ebayboy@163.com 
-@date:2019-10-22 16:34 
-@version: 1.0  
-@description: cpp file 
-@Copyright (c)  all right reserved 
-**************************************************************************/
+
+//1. accumulate -- compute function
 
 #include <iostream>
 #include <string>

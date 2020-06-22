@@ -1,5 +1,5 @@
-/* Ààº¯ÊıÖØÔØ */
 
+//funtion  overload
 #include <iostream> 
 
 using namespace std;

@@ -1,12 +1,5 @@
-/****************************************************************************
-@file:bound.cpp
-@author:ebayboy@163.com
-@date:2019-10-18 19:45
-@version: 1.0
-@description: cpp file
-@Copyright (c)  all right reserved
-**************************************************************************/
 
+//sort && lower_bound && upper_bound
 //lower_bound和upper_bound都是返回大于value的元素的位置
 
 #include <iostream>

@@ -15,35 +15,38 @@
 
 using namespace std;
 
-#define DEBUG 
-
+#define DEBUG
 
 void show_array(int *a, int len)
 {
-	for (int i = 0; i< len; i++)
+	for (int i = 0; i < len; i++)
 		cout << *(a + i) << " ";
 	cout << endl;
 }
 
 void bubble_sort(int *a, int len)
 {
-	int i,j;
+	int i, j;
 	int temp;
 
-	for(i=0;i<len;i++) {
-		for(j = i + 1;j< len; j++) {
-			if(a[i]>a[j]) {
+	for (i = 0; i < len - 1; i++)
+	{
+		for (j = 0; j < len - 1 - i; j++)
+		{
+			if (a[j] > a[j + 1])
+			{
 				//swap
-				temp=a[j];
-				a[j]=a[i];
-				a[i]=temp;
+				temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
 			}
 		}
 	}
 }
 int main(int argc, char **argv)
 {
-	int a[9]= {3 , 1, 5, 4, 6, 2, 7, 9, 8 };
+	int a[9] = {3, 1, 5, 4, 6, 2, 7, 9, 8};
+
 	show_array((int *)&a, 9);
 
 	bubble_sort((int *)&a, 9);
@@ -52,4 +55,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-

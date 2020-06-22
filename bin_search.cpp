@@ -1,11 +1,5 @@
-/****************************************************************************
-@file:bin_search.cpp 
-@author:ebayboy@163.com 
-@date:2019-10-18 19:42 
-@version: 1.0  
-@description: cpp file 
-@Copyright (c)  all right reserved 
-**************************************************************************/
+
+// vector && binary_search
 
 #include <iostream>
 #include <string>

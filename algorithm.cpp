@@ -1,11 +1,4 @@
-/****************************************************************************
-@file:algorithm.cpp
-@author:ebayboy@163.com
-@date:2019-10-23 14:28
-@version: 1.0
-@description: cpp file
-@Copyright (c)  all right reserved
-**************************************************************************/
+//1. clock_t -- get timestatmp
 
 #include <iostream>
 #include <string>

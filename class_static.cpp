@@ -3,9 +3,11 @@
 /* 静态变量： 
 们可以使用 static 关键字来把类成员定义为静态的。
 当我们声明类的成员为静态时，
-这意味着无论创建多少个类的对象，静态成员都只有一个副本。 */
 
-/* 静态成员函数：
+静态成员：
+这意味着无论创建多少个类的对象，静态成员都只有一个副本。 
+
+静态成员函数：
 没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数）。*/
 
 #include <iostream>
@@ -19,6 +21,7 @@ class Box {
 		double height;     // 高度
 
 	public:
+		//类静态成员
 		static int objCount;
 		Box(double l=2.0, double b=3.0, double h=4.0) {
 			length = l;
@@ -32,7 +35,8 @@ class Box {
 		double Volume() {
 			return length * breadth * height;
 		}
-		
+
+		//类静态函数, 只能访问静态成员
 		static int getObjCount(void)
 		{
 			return objCount;

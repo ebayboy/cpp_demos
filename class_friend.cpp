@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//友元函数： 定义在类的外部， 但有权访问类的私有成员和保护成员
+
 class Box
 {
 	

@@ -1,15 +1,12 @@
-/* Àà¶àÌ¬ : class_mul_shape.cpp 
-   ¶àÌ¬£º ¾ÍÊÇÅÉÉúÀà¼Ì³Ğ»ùÀàºó£¬ ²»Í¬µÄÅÉÉúÀà¶Ô»ùÀàµÄ·½·¨ÓĞ¶àÖÖÊµÏÖĞÎÌ¬ 
-*/
-
 #include <iostream>
-
 using namespace std;
+
+//å¤šæ€: 
+//æŒ‰å­—é¢çš„æ„æ€å°±æ˜¯å¤šç§å½¢æ€ã€‚å½“ç±»ä¹‹é—´å­˜åœ¨å±‚æ¬¡ç»“æ„ï¼Œå¹¶ä¸”ç±»ä¹‹é—´æ˜¯é€šè¿‡ç»§æ‰¿å…³è”æ—¶ï¼Œå°±ä¼šç”¨åˆ°å¤šæ€ã€‚
+//C++ å¤šæ€æ„å‘³ç€è°ƒç”¨æˆå‘˜å‡½æ•°æ—¶ï¼Œä¼šæ ¹æ®è°ƒç”¨å‡½æ•°çš„å¯¹è±¡çš„ç±»å‹æ¥æ‰§è¡Œä¸åŒçš„å‡½æ•°ã€‚
 
 /* base shape */
 class Shape {
-	
-	/* protected ¿ÉÒÔ±»ÅÉÉúÀàÖ±½Ó·ÃÎÊ */ 
 	protected:
 		int  width;
 		int height;
@@ -20,14 +17,11 @@ class Shape {
 			height = b;
 		}
 		
-		/* Ğéº¯Êı */ 
 		virtual int area() = 0;		
 };
 
 class Rectangle: public Shape {
 	public:
-		
-		/* ÅÉÉúÀà¹¹Ôìº¯Êı¼Ì³Ğ»ùÀà¹¹Ôìº¯Êı */ 
 		Rectangle (int a=0, int b = 0) : Shape(a, b) { }
 		int area ()
 		{
@@ -38,7 +32,6 @@ class Rectangle: public Shape {
 
 class Triangle : public Shape {
 	public:
-		Triangle (int a=0, int b= 0) : Shape(a, b) { }
 		Triangle (int a=0, int b= 0) : Shape(a, b) { }
 		int area() {
 			cout << "Triangle class area: " << endl;
@@ -52,15 +45,9 @@ int main()
 	Rectangle r(5, 10);
 	Triangle t(5, 10);
 	
-	/* ´øĞéº¯ÊıµÄ»ùÀà²»ÄÜ±»ÊµÀı»¯ */ 
 	// Shape s(1, 5);
-	
 	cout << r.area() << endl;
 	cout << t.area() << endl;
 	
 	return 0;
 } 
- 
- 
-
-

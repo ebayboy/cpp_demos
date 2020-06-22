@@ -1,3 +1,7 @@
+
+// 1. array int a[10]
+// 2. setw -- 设置输出字符宽度 
+
 #include <iostream>
 #include <iomanip>
 

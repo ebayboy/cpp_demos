@@ -1,4 +1,5 @@
-/* class  运算符重载 */
+
+//operator overload
 
 #include <iostream>
 
@@ -14,20 +15,17 @@ class Box {
 		int getLength();
 		void setLength(int x);
 
-		/* 一元云算法： 赋值 */
 		Box operator=(Box &b) {
 			this->length = b.length;
+			return b;
 		}
 
-		/* 二元操作重载 */
 		Box operator+(const Box &b);
 		bool operator<(const Box &b);
 
-		/* 自增运算符 */
 		Box operator++ ();
 		Box operator++ (int);
 
-		/* 函数调用运算符()重载 */
 		Box operator() (int x, int y, int z) {
 			Box b(0);
 
@@ -38,7 +36,6 @@ class Box {
 			return b;
 		}
 
-		/* 友员 输入/输出运算符 */
 		friend ostream &operator << (ostream &output, const Box &b) {
 			output << "Length:" << b.length << endl;
 			return output;
@@ -54,7 +51,6 @@ Box::Box(int l) {
 	length = l;
 }
 
-/* 一元操作符: operator+ */
 Box Box::operator+(const Box &b) {
 	Box box;
 
@@ -63,7 +59,6 @@ Box Box::operator+(const Box &b) {
 	return box;
 }
 
-/* 一元操作符:  operation < */
 bool Box::operator<(const Box &b) {
 	if (this->length < b.length) {
 		return true;
@@ -72,13 +67,11 @@ bool Box::operator<(const Box &b) {
 	return false;
 }
 
-/* 重载前缀++ */
 Box Box::operator++ () {
 	++this->length;
 	return *this;
 }
 
-/* 重载后缀++ */
 Box Box::operator++ (int) {
 	Box temp = *this;
 
@@ -128,4 +121,3 @@ int main() {
 
 	return 0;
 }
-

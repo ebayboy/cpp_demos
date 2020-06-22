@@ -1,10 +1,7 @@
-/* C++ ³éÏóÀà£¨½Ó¿Ú£© && Ðéº¯Êý */
-
 #include <iostream>
 
 using namespace std;
 
-/* ³éÏóÀà£ºº¬ÓÐÐéº¯ÊýµÄÀà */ 
 class Box {
 	protected:
 		double length;
@@ -18,12 +15,13 @@ class Box {
 			height = h;
 		}
 		
-		/* Ðéº¯Êý */ 
+		//çº¯è™šå‡½æ•°ï¼Œç­‰äºŽ0è¡¨ç¤ºæ²¡æœ‰å‡½æ•°ä½“
 		virtual double getVolume() = 0;
 };
 
 class TranbleBox : Box {
 	public:
+		//è™šå‡½æ•°ï¼š å®žçŽ°äº†çº¯è™šå‡½æ•°
 		TranbleBox(int l, int b, int h) : Box(l, b, h) { };
 		double getVolume() {
 			return length * breadth * height;

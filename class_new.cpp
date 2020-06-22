@@ -1,6 +1,6 @@
 
+// new delete
 #include <iostream>
-
 
 using namespace std;
 
@@ -13,7 +13,6 @@ class Box
 		~Box() {
 			cout << "Destructor!" << endl;
 		}
-
 };
 
 int main()
