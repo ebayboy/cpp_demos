@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <memory> //used in linux
 
 using namespace std;
 
