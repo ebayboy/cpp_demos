@@ -76,5 +76,14 @@
         "unordered_set": "cpp",
         "utility": "cpp",
         "vector": "cpp"
-    }
+    },
+    "code-runner.runInTerminal": true,
+    "C_Cpp.default.cppStandard": "c++11",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -std=c++11 && $dir$fileNameWithoutExt"
+    },
+    "files.associations": {
+        "typeinfo": "cpp"
+    },
+    "window.zoomLevel": 1,
 }
