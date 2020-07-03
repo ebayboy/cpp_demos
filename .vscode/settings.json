@@ -78,9 +78,9 @@
         "vector": "cpp"
     },
     "code-runner.runInTerminal": true,
-    "C_Cpp.default.cppStandard": "c++11",
+    "C_Cpp.default.cppStandard": "c++17",
     "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -std=c++11 && $dir$fileNameWithoutExt"
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -std=c++17 && $dir$fileNameWithoutExt"
     },
     "files.associations": {
         "typeinfo": "cpp"
