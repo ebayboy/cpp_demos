@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "typeinfo": "cpp",
-        "utility": "cpp"
+        "xtree": "cpp"
     },
     "code-runner.runInTerminal": true,
     "C_Cpp.default.cppStandard": "c++11",
