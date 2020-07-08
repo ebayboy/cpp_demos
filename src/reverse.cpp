@@ -29,7 +29,7 @@ void show(vector<int> v)
 int main(int argc, char **argv)
 {
 
-    cout<<"hello world!"<<endl;
+    //reverse vector
     vector<int> v1 = { 1,2,3,4,5 };
 	show(v1);
 
@@ -39,6 +39,15 @@ int main(int argc, char **argv)
 	vector<int> v2(10);
 	std::reverse_copy(std::begin(v1), std::end(v1), std::begin(v2));
 	show(v2);
+
+    //reverse array
+    int arr[4] = {1,2,3,4};
+    std::reverse(arr, arr + 4);
+    for (auto &&i : arr)
+    {
+        cout << i << endl; 
+    }
+    
 
     return 0;
 }

@@ -18,22 +18,31 @@ void testMap()
         m.insert(pair<string, int>(string("fanpf"), 30));
         m.insert(pair<string, int>(string("rose"), 31));
         m.insert(pair<string, int>(string("kevin"), 32));
+
+        //不能插入重复key的元素
+        m.insert(pair<string, int>(string("rose"), 33));
+    }
+
+    for (auto &&i : m)
+    {
+        cout << i.first << ":" << i.second << endl;
     }
 
     //find key, then erase node
     std::map<std::string, int>::iterator r = m.find("kevin");
-    if (r != m.end()) {
-        cout << "find: " << (*r).first <<  " second:" << (*r).second << endl;
+    if (r != m.end())
+    {
+        cout << "find: " << (*r).first << " second:" << (*r).second << endl;
         m.erase(r);
     }
 
     //erase by key
     m.erase("rose");
 
-    //loop show 
+    //loop show
     for (auto &&i : m)
     {
-       cout << "first:" << i.first << "  second:" <<i.second << endl;
+        cout << "first:" << i.first << "  second:" << i.second << endl;
     }
 }
 
