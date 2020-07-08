@@ -5,6 +5,9 @@
 @version: 1.0
 @description: cpp file
 @Copyright (c)  all right reserved
+
+//set: 不能插入重复元素
+
 **************************************************************************/
 
 #include <iostream>
@@ -53,6 +56,7 @@ int main(int argc, char **argv)
 	set_show(s, "set s:");
 	set_showr(s);
 
+	//删除元素
 	s.erase(2);
 	set_show(s, "after earase 2, s:");
 
