@@ -20,14 +20,14 @@ void testMap()
         m.insert(pair<string, int>(string("kevin"), 32));
     }
 
-    //find by key
+    //find key, then erase node
     std::map<std::string, int>::iterator r = m.find("kevin");
     if (r != m.end()) {
         cout << "find: " << (*r).first <<  " second:" << (*r).second << endl;
         m.erase(r);
     }
 
-    //erase key rose
+    //erase by key
     m.erase("rose");
 
     //loop show 
@@ -35,7 +35,6 @@ void testMap()
     {
        cout << "first:" << i.first << "  second:" <<i.second << endl;
     }
-
 }
 
 int main(int args, char **argv)
