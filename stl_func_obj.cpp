@@ -1,10 +1,7 @@
+
+//模板函数对象
+
 #include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-#include <stack>
-#include <queue>
-#include <map>
 
 using namespace std;
 
