@@ -1,1 +1,4 @@
 !*.cpp
+*.exe
+src/tempCodeRunnerFile.cpp
+tempCodeRunnerFile.cpp

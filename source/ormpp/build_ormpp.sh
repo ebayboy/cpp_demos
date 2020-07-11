@@ -1,1 +1,0 @@
-/root/github/scripts/build_ormpp.sh

@@ -1,53 +1,54 @@
-/****************************************************************************
-@file:map.cpp 
-@author:ebayboy@163.com 
-@date:2019-10-08 15:22 
-@version 1.0  
-@description: cpp file 
-@Copyright (c)  all right reserved 
-**************************************************************************/
-
 #include <iostream>
+#include <string>
+#include <vector>
+#include <set>
+#include <stack>
+#include <queue>
 #include <map>
 
 using namespace std;
 
-int main(int argc, char **argv)
+void testMap()
 {
-	map<string, string> dic;
-	map <string,string>::iterator it;
+    map<string, int> m;
 
-	dic.insert(pair<string,string>("id1", "value1"));
-	dic.insert(pair<string,string>("id2", "value2"));
-	dic.insert(pair<string,string>("id3", "value3"));
+    //insert
+    for (size_t i = 0; i < 5; i++)
+    {
+        m.insert(pair<string, int>(string("fanpf"), 30));
+        m.insert(pair<string, int>(string("rose"), 31));
+        m.insert(pair<string, int>(string("kevin"), 32));
 
-	dic.insert(pair<string,string>("id1", "value11"));
-	dic.insert(pair<string,string>("id3", "value33"));
+        //不能插入重复key的元素
+        m.insert(pair<string, int>(string("rose"), 33));
+    }
 
-	/* 遍历map */
-	for (it = dic.begin(); it != dic.end(); it++) {
-		cout << it->first << ":" << it->second << endl;
-	}
+    for (auto &&i : m)
+    {
+        cout << i.first << ":" << i.second << endl;
+    }
 
-	// find 
-	it = dic.find("id1");
+    //find key, then erase node
+    std::map<std::string, int>::iterator r = m.find("kevin");
+    if (r != m.end())
+    {
+        cout << "find: " << (*r).first << " second:" << (*r).second << endl;
+        m.erase(r);
+    }
 
-	if (it == dic.end()) {
-		cout << "not find!" << endl;
-	} else {
-		cout << "value:" << dic["id1"] << endl;
-	}
+    //erase by key
+    m.erase("rose");
 
-
-	//delete
-	dic.erase(it); 
-	cout << "after erase" << endl;
-	if (it == dic.end()) {
-		cout << "not find!" << endl;
-	} else {
-		cout << "value:" << dic["id1"] << endl;
-	}
-
-	return 0;
+    //loop show
+    for (auto &&i : m)
+    {
+        cout << "first:" << i.first << "  second:" << i.second << endl;
+    }
 }
 
+int main(int args, char **argv)
+{
+    testMap();
+
+    return 0;
+}
