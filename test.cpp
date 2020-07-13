@@ -1,14 +1,15 @@
+// 实现bind1st函数对象
+
 #include <iostream>
-#include <string>
 #include <algorithm>
-#include <vector>
 #include <functional>
 
 using namespace std;
 
+
 int main(int args, char **argv)
 {
-    cout << "aa"  << endl;
+    cout << max('a', 'b');
 
     return 0;
 }
