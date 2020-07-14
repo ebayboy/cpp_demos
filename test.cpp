@@ -1,36 +1,18 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
-#include <fstream>
+
 
 using namespace std;
 
 int main()
 {
-    ofstream of("./1.txt", ios::app);
-    if (of.bad())
-    {
-        cerr << "error!" << endl;
-        return -1;
+    size_t qps = 0;
+    size_t ipPerLoop = qps/10;
+
+    for(size_t n = 0; n < ipPerLoop; n++) {
+        cout << "n:" << n << endl;
     }
-
-    stringstream ss;
-
-    //清空stringstream使用 ss("");
-
-    for (size_t i = 0; i < 5; i++)
-    {
-        ss << "age: " << i << endl;
-    }
-
-    of << ss.str();
-
-    cout << "before clear data:" << ss.str() << endl;
-    ss.str("");
-    cout << "after clear data:" << ss.str() << endl;
-
-    of.close();
 
     return 0;
 }
