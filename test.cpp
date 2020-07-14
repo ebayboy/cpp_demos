@@ -1,22 +1,31 @@
 
-#include <string>  
-#include <iostream>  
-   
-using namespace std;  
+#include <cstdio>
+#include <sys/time.h>
+#include <iostream>
+#include <string>
+#include <sstream>
 
-void testCols(string cols [])
+using namespace std;
+
+/* 1265222655.591(ms) */
+string getCurrentTime()
 {
+    struct timeval tv;
+    stringstream ss;
 
-    cout << sizeof(cols)/sizeof(string)<< endl;
+    gettimeofday(&tv, NULL);
+    long sec  = tv.tv_sec *1000 + tv.tv_usec / 1000;
+    long usec = tv.tv_usec % 1000;
+
+
+    ss << sec << "." << usec;
+
+    return ss.str();
 }
 
-int main()  
-{  
-    string cols[] = { "111", "222", "333"}; 
+int main()
+{
+    cout << "time:" << getCurrentTime() << endl;
 
-    cout << "size:" <<sizeof(cols) /sizeof(string) << endl;
-
-    testCols(cols);
-
-    return 0;  
-}  
+    return 0;
+}

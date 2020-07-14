@@ -7,6 +7,10 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <ctime>
+#include <sstream>
+#include <cstdio>
+#include <sys/time.h>
 
 using namespace std;
 
@@ -32,6 +36,52 @@ void updateUsedCols(vector<int> usedColsIdx, vector<string> vals, vector<string>
         int idx = usedColsIdx[i];
         strs[idx] = vals[i];
     }
+}
+
+string getLocalTime()
+{
+    //29/May/2020:16:38:19 +0800 nginx_log
+    vector<string> mon = {
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"};
+    time_t t;
+    tm *lt;
+    t = time(NULL);
+    lt = localtime(&t);
+
+    stringstream ss;
+    string stm;
+    int tm_year = lt->tm_year + 1900;
+    //int tm_month = lt->tm_mon + 1;
+
+    ss << lt->tm_mday << "/" << mon[lt->tm_mon] << "/" << tm_year << ":" << lt->tm_hour << ":" << lt->tm_min << ":" << lt->tm_sec << " +0800 nginx_log";
+
+    return ss.str();
+}
+
+/* 1265222655.591(ms) */
+string getCurrentTimeMsec()
+{
+    struct timeval tv;
+    stringstream ss;
+
+    gettimeofday(&tv, NULL);
+    long sec = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+    long usec = tv.tv_usec % 1000;
+
+    ss << sec << "." << usec;
+
+    return ss.str();
 }
 
 int main(int args, char **argv)
@@ -95,15 +145,15 @@ int main(int args, char **argv)
         "anti_resp_raw"};
 
     vector<string> usedCols = {
-        "time_local_nginx_log", //13/Jul/2020:19:13:19 +0800 nginx_log
-        "instance_id",          //123
-        "host",                 //10.226.133.8
-        "remote_addr",          //10.226.149.215
-        "msec",                 //1590741499.339
-        "status",               //200 | 400
-        "uri",                  //  /
-        "http_user_agent",      // Mozilla/5.0
-        "anti_typ"              // ""
+        "time_local_nginx_log", //0 //13/Jul/2020:19:13:19 +0800 nginx_log
+        "instance_id",          //1 //123
+        "host",                 //2 //10.226.133.8
+        "remote_addr",          //3 //10.226.149.215
+        "msec",                 //4 //1590741499.339
+        "status",               //5 //200 | 400
+        "uri",                  //6 //  /
+        "http_user_agent",      //7 // Mozilla/5.0
+        "anti_typ"              //8 // ""
     };
 
     vector<int> usedColsIdx;
@@ -131,7 +181,55 @@ int main(int args, char **argv)
     vector<string> strs;
     stringSplit(s, sep, strs);
 
-    vector<string> usedColsVals = {"111", "222", "333", "444", "555", "666", "777", "888", "999"};
+    vector<string> hosts;
+    vector<string> remote_addrs;
+
+    for (size_t i = 1; i < 100; i++)
+    {
+        // 100 hosts
+        stringstream ss;
+        ss << "10.226.133." << i;
+        hosts.push_back(ss.str());
+    }
+
+    size_t count = 1000;
+    for (size_t i = 1; i < 254 && count > 0; i++, count--)
+    {
+        // 1000 remote_addr
+        //10.226.1.1
+        stringstream ss;
+        ss << "10.226." << i;
+        for (size_t j = 1; j < 254; j++)
+        {
+            stringstream ss1;
+            ss1 << ss.str() << "." << j;
+            remote_addrs.push_back(ss1.str());
+        }
+    }
+
+    //每秒插入10条数据
+
+    vector<string> usedColsVals = {"111", "123", "10.226.133.8", "10.226.149.215", "555", "666", "777", "888", "999"};
+    string remote_addr = "10.226.149.215"; //param1
+    string host = "10.226.133.8";          //param2
+    string instance_id = "123";
+    string status = "200";
+    string uri = "/";
+    string user_agent = "Mozilla/5.0";
+    string anti_typ = "";
+    string localtime = getLocalTime();
+    string msec = getCurrentTimeMsec();
+
+    usedColsVals[0] = localtime;
+    usedColsVals[1] = instance_id;
+    usedColsVals[2] = host;
+    usedColsVals[3] = remote_addr;
+    usedColsVals[4] = msec;
+    usedColsVals[5] = status;
+    usedColsVals[6] = uri;
+    usedColsVals[7] = user_agent;
+    usedColsVals[8] = anti_typ;
+
     updateUsedCols(usedColsIdx, usedColsVals, strs);
 
     cout << "after udpate:" << endl;
