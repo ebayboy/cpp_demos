@@ -11,6 +11,9 @@
 #include <sstream>
 #include <cstdio>
 #include <sys/time.h>
+#include <fstream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -209,33 +212,46 @@ int main(int args, char **argv)
 
     //每秒插入10条数据
 
-    vector<string> usedColsVals = {"111", "123", "10.226.133.8", "10.226.149.215", "555", "666", "777", "888", "999"};
-    string remote_addr = "10.226.149.215"; //param1
-    string host = "10.226.133.8";          //param2
     string instance_id = "123";
     string status = "200";
     string uri = "/";
     string user_agent = "Mozilla/5.0";
     string anti_typ = "";
-    string localtime = getLocalTime();
-    string msec = getCurrentTimeMsec();
-
-    usedColsVals[0] = localtime;
-    usedColsVals[1] = instance_id;
-    usedColsVals[2] = host;
-    usedColsVals[3] = remote_addr;
-    usedColsVals[4] = msec;
-    usedColsVals[5] = status;
-    usedColsVals[6] = uri;
-    usedColsVals[7] = user_agent;
-    usedColsVals[8] = anti_typ;
-
-    updateUsedCols(usedColsIdx, usedColsVals, strs);
-
-    cout << "after udpate:" << endl;
-    for (auto &&i : usedColsIdx)
+    string host;
+    string remote_addr;
+    string localtime;
+    string msec;
+    stringstream ss;
+    for (size_t i = 0; i < hosts.size(); i++)
     {
-        cout << cols[i] << ":" << strs[i] << endl;
+        host = hosts[i];
+        for (size_t j = 0; j < remote_addrs.size(); j++)
+        {
+            vector<string> usedColsVals = {"111", "123", "10.226.133.8", "10.226.149.215", "555", "666", "777", "888", "999"};
+            remote_addr = remote_addrs[j];
+            localtime = getLocalTime();
+            msec = = getCurrentTimeMsec();
+
+            //set vals
+            usedColsVals[0] = localtime;
+            usedColsVals[1] = instance_id;
+            usedColsVals[2] = host;
+            usedColsVals[3] = remote_addr;
+            usedColsVals[4] = msec;
+            usedColsVals[5] = status;
+            usedColsVals[6] = uri;
+            usedColsVals[7] = user_agent;
+            usedColsVals[8] = anti_typ;
+            updateUsedCols(usedColsIdx, usedColsVals, strs);
+
+            for (size_t k = 0; k < strs.size(); k++)
+            {
+                ss << str[i] << sep;
+                cout << ss.str() << end;
+                ss.str("");
+            }       
+            std::this_thread::sleep_for(std::chrono::seconds(3)); //休眠100毫秒
+        }
     }
 
     return 0;

@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    ofstream of("./1.txt");
+    ofstream of("./1.txt", ios::app);
     if (of.bad())
     {
         cerr << "error!" << endl;

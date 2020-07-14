@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//build: g++ -std=c++11 thread.cpp -lpthread
+//build: g++ thread.cpp -std=c++11  -lpthread
 
 // 线程1的线程函数
 void threadProc1()
