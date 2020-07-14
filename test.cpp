@@ -1,15 +1,22 @@
-// 实现bind1st函数对象
 
-#include <iostream>
-#include <algorithm>
-#include <functional>
+#include <string>  
+#include <iostream>  
+   
+using namespace std;  
 
-using namespace std;
-
-
-int main(int args, char **argv)
+void testCols(string cols [])
 {
-    cout << max('a', 'b');
 
-    return 0;
+    cout << sizeof(cols)/sizeof(string)<< endl;
 }
+
+int main()  
+{  
+    string cols[] = { "111", "222", "333"}; 
+
+    cout << "size:" <<sizeof(cols) /sizeof(string) << endl;
+
+    testCols(cols);
+
+    return 0;  
+}  

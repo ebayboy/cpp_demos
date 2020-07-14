@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 	vector<int> v = {3,1,2,4,5,1};
 
 	auto it = std::find(v.begin(), v.end(), 1);
+
 	cout << *it << endl;
 
 	//find_if
