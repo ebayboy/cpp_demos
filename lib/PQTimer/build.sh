@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ sample.cpp PQTimer.cpp  -std=c++11 -pthread
+g++ sample.cpp -o sample PQTimer.cpp  -std=c++11 -pthread
