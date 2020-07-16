@@ -246,7 +246,11 @@ int testCase(size_t hostSize, size_t ipSize, size_t ipQPS, string logfile)
 					usedColsVals[8] = anti_typ;
 
 					updateUsedCols(usedColsIdx, usedColsVals, strs);
-					ss << strs[k] << sep;
+
+                    if (k > 0) {
+                        ss << sep;
+                    }
+					ss << strs[k];
 				}       
 				//cout << ss.str() << endl;
 				of << ss.str() << endl;
@@ -271,17 +275,22 @@ static void ParseLog(string fname)
 
     stringstream sbuf;
     sbuf << f.rdbuf();
-    cout << sbuf.str() << endl;
 
 	string sep = "#?#  :";
     vector<string> strs;
 	stringSplit(sbuf.str(), sep, strs);
 
     if (cols.size() != strs.size()) {
+        cout << sbuf.str() << endl;
         cout << "size(cols):" << cols.size() << endl;
         cout << "size(log):" << strs.size() << endl;
-        for_each(strs.begin(), strs.end(), [&](string x) -> void { cout << "[" << x << "]" << endl;} );
+        //for_each(strs.begin(), strs.end(), [&](string x) -> void { cout << "[" << x << "]" << endl;} );
         cerr << "Error: size not equal!" << endl;
+     
+        for(size_t i=0; i < cols.size(); i++) {
+            cout << cols[i] << ":" << strs[i] << endl;
+        }
+
         return ; 
     }
     
