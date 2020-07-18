@@ -18,6 +18,7 @@ int main(int args, char **argv)
     };
 
     cout << funcs["+"](3,5) << endl;
+    cout << funcs["*"](3,5) << endl;
 
     return 0;
 }
