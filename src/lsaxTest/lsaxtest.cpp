@@ -15,8 +15,68 @@
 #include <chrono>
 #include <thread>
 #include <getopt.h>
+#include <cstring>
 
 using namespace std;
+
+vector<string> cols = {
+    "time_local_nginx_log",
+    "hostname",
+    "pid",
+    "msec",
+    "remote_addr",
+    "remote_port",
+    "document_uri",
+    "status",
+    "bytes_sent",
+    "request_length",
+    "ssl_protocol",
+    "ssl_session_reused",
+    "C_IDC",
+    "tcpinfo_rtt",
+    "host",
+    "server_addr",
+    "server_port",
+    "upstream_http_name",
+    "upstream_addr",
+    "upstream_http_port",
+    "upstream_connect_time",
+    "upstream_header_time",
+    "upstream_response_time",
+    "request_time",
+    "connections_active",
+    "connections_reading",
+    "connection_requests",
+    "connections_writing",
+    "server_name",
+    "http_user_agent",
+    "anti_reason",
+    "anti_action",
+    "request_id",
+    "request_method",
+    "http_referer",
+    "scheme",
+    "uri",
+    "instance_id",
+    "host@$instance_id",
+    "server_protocol",
+    "sent_http_content_range",
+    "content_type",
+    "content_length",
+    "body_bytes_sent",
+    "upstream_bytes_received",
+    "upstream_status",
+    "request_uri",
+    "anti_remote_addr",
+    "anti_status",
+    "anti_payload",
+    "user_pin",
+    "upstream_cache_status",
+    "anti_typ",
+    "upstream_err",
+    "anti_req_raw",
+    "anti_resp_raw"};
+
 
 void stringSplit(string const s, string sep, vector<string> &strs)
 {
@@ -31,6 +91,8 @@ void stringSplit(string const s, string sep, vector<string> &strs)
         strs.push_back(s.substr(pos, n - pos));
         pos = n + sep.size();
     }
+
+    strs.push_back(s.substr(pos, s.size() - pos - 1));
 }
 
 void updateUsedCols(vector<int> usedColsIdx, vector<string> vals, vector<string> &strs)
@@ -87,64 +149,6 @@ string getCurrentTimeMsec()
 
 int testCase(size_t hostSize, size_t ipSize, size_t ipQPS, string logfile)
 {
-	vector<string> cols = {
-		"time_local_nginx_log",
-		"hostname",
-		"pid",
-		"msec",
-		"remote_addr",
-		"remote_port",
-		"document_uri",
-		"status",
-		"bytes_sent",
-		"request_length",
-		"ssl_protocol",
-		"ssl_session_reused",
-		"C_IDC",
-		"tcpinfo_rtt",
-		"host",
-		"server_addr",
-		"server_port",
-		"upstream_http_name",
-		"upstream_addr",
-		"upstream_http_port",
-		"upstream_connect_time",
-		"upstream_header_time",
-		"upstream_response_time",
-		"request_time",
-		"connections_active",
-		"connections_reading",
-		"connection_requests",
-		"connections_writing",
-		"server_name",
-		"http_user_agent",
-		"anti_reason",
-		"anti_action",
-		"request_id",
-		"request_method",
-		"http_referer",
-		"scheme",
-		"uri",
-		"instance_id",
-		"host@$instance_id",
-		"server_protocol",
-		"sent_http_content_range",
-		"content_type",
-		"content_length",
-		"body_bytes_sent",
-		"upstream_bytes_received",
-		"upstream_status",
-		"request_uri",
-		"anti_remote_addr",
-		"anti_status",
-		"anti_payload",
-		"user_pin",
-		"upstream_cache_status",
-		"anti_typ",
-		"upstream_err",
-		"anti_req_raw",
-		"anti_resp_raw"};
-
 	vector<string> usedCols = {
 		"time_local_nginx_log", //0 //13/Jul/2020:19:13:19 +0800 nginx_log
 		"instance_id",          //1 //123
@@ -242,7 +246,11 @@ int testCase(size_t hostSize, size_t ipSize, size_t ipQPS, string logfile)
 					usedColsVals[8] = anti_typ;
 
 					updateUsedCols(usedColsIdx, usedColsVals, strs);
-					ss << strs[k] << sep;
+
+                    if (k > 0) {
+                        ss << sep;
+                    }
+					ss << strs[k];
 				}       
 				//cout << ss.str() << endl;
 				of << ss.str() << endl;
@@ -257,33 +265,73 @@ int testCase(size_t hostSize, size_t ipSize, size_t ipQPS, string logfile)
 	return 0;
 }
 
+static void ParseLog(string fname)
+{
+    ifstream f(fname);
+    if (f.bad()) {
+        cerr << "Error: open file error!" << endl;
+        return ;
+    }
+
+    stringstream sbuf;
+    sbuf << f.rdbuf();
+
+	string sep = "#?#  :";
+    vector<string> strs;
+	stringSplit(sbuf.str(), sep, strs);
+
+    if (cols.size() != strs.size()) {
+        cout << sbuf.str() << endl;
+        cout << "size(cols):" << cols.size() << endl;
+        cout << "size(log):" << strs.size() << endl;
+        //for_each(strs.begin(), strs.end(), [&](string x) -> void { cout << "[" << x << "]" << endl;} );
+        cerr << "Error: size not equal!" << endl;
+     
+        for(size_t i=0; i < cols.size(); i++) {
+            cout << cols[i] << ":" << strs[i] << endl;
+        }
+
+        return ; 
+    }
+    
+    for(size_t i=0; i < cols.size(); i++) {
+        cout << cols[i] << ":" << strs[i] << endl;
+    }
+
+    f.close();
+}
+
 int main(int argc, char **argv)
 {
 	size_t hostSize = 1;
-	size_t ipSize = 3;
-	size_t ipQPS = 5;
+	size_t ipSize = 2;
+	size_t ipQPS = 10;
 	string logfile = "/export/servers/jfe/logs/access.log";
+    string fname;
 
 	int ch;
 	opterr = 0;
-	while((ch = getopt(argc,argv, "h:i:q:l:"))!= -1) {
+	while((ch = getopt(argc,argv, "h:i:q:l:p:"))!= -1) {
 		switch(ch)
 		{
-
-			case 'h':
-				hostSize = atoi(optarg);
-				break;
-			case 'i':
-				ipSize = atoi(optarg);
-				break;
-			case 'q':
-				ipQPS = atoi(optarg);
-				break;
-			case 'l':
-				logfile = optarg;
-				break;
-			default:
-				cout << "help:\n-h hostSize\n-i ipSize\n-q qps\n-l logfile" << endl;
+          case 'h':
+              hostSize = atoi(optarg);
+              break;
+          case 'i':
+              ipSize = atoi(optarg);
+              break;
+          case 'q':
+              ipQPS = atoi(optarg);
+              break;
+          case 'l':
+              logfile = optarg;
+              break;
+          case 'p':
+              fname = optarg;
+              ParseLog(fname);
+              return 0;
+          default:
+              cout << "help:\n-h hostSize\n-i ipSize\n-q qps\n-l logfile" << endl;
 				return -1;
 		}
 	}

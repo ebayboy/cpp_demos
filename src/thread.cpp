@@ -1,11 +1,18 @@
 
 #include <iostream>
-#include <thread>
 #include <string>
+
+
+#ifndef _WIN32_WINNT
+#include <thread>
+#else
+#include "lib/mingw-std-threads/mingw.thread.h"
+#endif
 
 using namespace std;
 
-//build: g++ thread.cpp -std=c++11  -lpthread
+//linux build: g++ thread.cpp -std=c++11  -lpthread
+//mingw build: g++ test.cpp -o test.exe -std=c++11 -D _WIN32_WINNT=0x0601
 
 // 线程1的线程函数
 void threadProc1()
