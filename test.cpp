@@ -1,13 +1,30 @@
 
 #include <thread>
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
 
 using namespace std;
 
 int main()
 {
-    //g++ test.cpp -o test -std=c++11
-    cout << "sleep 3 start " << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    cout << "sleep over!" << endl;
+    vector<int> v = {1, 3, 5};
+
+    int a = std::accumulate(v.begin(), v.end(), 0);
+
+    cout << a << endl;
+
+    vector<bool> v1 = {true, true, true};
+    bool b = std::accumulate(v1.begin(), v1.end(), true,
+                             [](bool x, bool y) {
+                                 cout << "x:" << x << endl;
+                                 cout << "y:" << y << endl;
+                                 bool z = x & y;
+                                 cout << "z:" << z << endl;
+                                 return z;
+                             });
+    cout << b << endl;
+
+    return 0;
 }
