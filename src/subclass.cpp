@@ -1,25 +1,28 @@
 /* class_protect.class */
 
-/* ÅÉÉúÀà¶ÔÏó×ª»»³É»ùÀà¶ÔÏó */ 
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 
 #include <iostream>
 #include <cstring>
 
 using namespace std;
 
-
 /* ================  CLASS BOX ================== */
 class Box
 {
-	private:
-		double height;
-		
-	protected: 
-		double width;	
-	
-	public:
-		void setHeight(double h);
-		double getHeight(void);
+private:
+	double height;
+
+protected:
+	double width;
+
+public:
+	Box()
+	{
+		cout << "Box constructor..." << endl;
+	}
+	void setHeight(double h);
+	double getHeight(void);
 };
 
 void Box::setHeight(double h)
@@ -34,11 +37,19 @@ double Box::getHeight(void)
 /* ================== CLASS SMALLBOX =========================== */
 class SmallBox : Box
 {
-	public:
-		void setSmallWidth(double wid);
-		double getSmallWidth(void);	
-		void setSmallHeight(double h);
-		double getSmallHeight(void);
+public:
+	SmallBox()
+	{
+		cout << "SmallBox constructor..." << endl;
+	}
+	SmallBox(string name)
+	{
+		cout << "SmallBox constructor..." << name << endl;
+	}
+	void setSmallWidth(double wid);
+	double getSmallWidth(void);
+	void setSmallHeight(double h);
+	double getSmallHeight(void);
 };
 
 double SmallBox::getSmallWidth()
@@ -64,28 +75,32 @@ double SmallBox::getSmallHeight(void)
 int main()
 {
 
+#if 0
 	SmallBox *small = new SmallBox();
-	
-	/* ·ÃÎÊË³Ðò  ÅÉÉúÀàpublicº¯Êý -> »ùÀàpublic³ÉÔ± */ 
+
+	/* ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½publicï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½publicï¿½ï¿½Ô± */
 	small->setSmallWidth(5.0);
 	cout << "SmallWidth:" << small->getSmallWidth() << endl;
-	
-	/* ·ÃÎÊË³Ðò ÅÉÉúÀàpublicº¯Êý -> »ùÀàpublicº¯Êý -> »ùÀàprivate³ÉÔ±  */ 
-	small->setSmallHeight(11.01); 
+
+	/* ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½publicï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½publicï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½privateï¿½ï¿½Ô±  */
+	small->setSmallHeight(11.01);
 	cout << "getSmallHeight:" << small->getSmallHeight() << endl;
-	
-	/* ÅÉÉúÀà×ª»»³É»ùÀà */ 
+
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É»ï¿½ï¿½ï¿½ */
 	Box *b = (Box *)small;
-	
+
 	cout << "Before convert , Box Height: " << b->getHeight() << endl;
-	
-	/* »ùÀàÉèÖÃheight */ 
+
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½height */
 	b->setHeight(20.01);
-	
-	/* ½á¹û¶¼ÊÇ 20.01 */ 
+
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 20.01 */
 	cout << "After convert Box Height: " << b->getHeight() << endl;
 	cout << "After convert SmallBox Height: " << small->getSmallHeight() << endl;
+#endif
+	//SmallBox sb;
+
+	SmallBox sb1("fanpf");
 
 	return 0;
 }
-

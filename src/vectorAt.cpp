@@ -92,9 +92,33 @@ void testV3() noexcept
     cout << "v.at(10):" << v.at(10) << endl;
 }
 
+void testV4()
+{
+    vector<int> v(10);
+
+    for (size_t i = 0; i < 10; i++)
+    {
+        v.at(i) = i;
+    }
+
+    for (auto &&i : v)
+    {
+        cout << i << endl;
+    }
+
+    v.at(9) = 111;
+    cout << "v.at(9):" << v.at(9) << endl;
+
+    //通过at方法访问vector， 越界抛出异常，程序继续运行
+    v.at(10) = 112;
+    cout << "v.at(10):" << v.at(10) << endl;
+}
+
 int main(int args, char **argv)
 {
-   // testV();
+    goto testV4;
+
+    testV();
 
     try
     {
@@ -107,9 +131,19 @@ int main(int args, char **argv)
 
     cout << "end" << endl;
 
-    
     testV3();
     cout << "testV3 ok!" << endl;
+
+testV4:
+    try
+    {
+        testV4();
+        cout << "testV3 ok!" << endl;
+    }
+    catch (exception &e)
+    {
+        cout << e.what() << endl;
+    }
 
     return 0;
 }
