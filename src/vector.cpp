@@ -33,12 +33,12 @@ int main() {
 
 	vector <int> arr;
 
-	/* 0. Ìí¼ÓÔªËØµ½ÈÝÆ÷ */
+	/* 0. ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ */
 	for (int i = 0; i < sizeof(a)/sizeof(int); i++) {
 		arr.push_back(a[i]);
 	}
 
-	/* 1. Í¨¹ýÏÂ±êÉ¾³ýÔªËØ */
+	/* 1. Í¨ï¿½ï¿½ï¿½Â±ï¿½É¾ï¿½ï¿½Ôªï¿½ï¿½ */
 	for (int j = 0; j < arr.size(); j++) {
 		if (arr[j] == 2) {
 			cout << "del:" << arr[j] << endl;
@@ -48,10 +48,10 @@ int main() {
 		cout << arr[j] << endl;
 	}
 
-	/* 2. Í¨¹ýÏÂ±êÕ¹Ê¾ */
+	/* 2. Í¨ï¿½ï¿½ï¿½Â±ï¿½Õ¹Ê¾ */
 	show_arr(arr);
 
-	/* 3. Í¨¹ýµü´úÆ÷É¾³ý */
+	/* 3. Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ */
 	vector <int>::iterator it;
 	for (it = arr.begin(); it != arr.end(); it++) {
 		if (*it == 3) {
@@ -59,7 +59,7 @@ int main() {
 		}
 	}
 
-	/* 4. Í¨¹ýµü´úÆ÷Õ¹Ê¾ */
+	/* 4. Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾ */
 	show_arr_with_it(arr);
 
 	/* 5. insert 5 */
