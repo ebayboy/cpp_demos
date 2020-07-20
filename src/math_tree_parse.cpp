@@ -51,6 +51,7 @@ int build(char *s, int x, int y) //x表示字符串的起始地址，y表示结�
 }
 void qianxu(int u)
 {
+    //root -> left -> right
     if (u)
     {
         printf("%c", op[u]);
@@ -60,6 +61,7 @@ void qianxu(int u)
 }
 void zhongxu(int u)
 {
+    //left -> root -> right
     if (u)
     {
         zhongxu(lch[u]);
@@ -69,6 +71,7 @@ void zhongxu(int u)
 }
 void houxu(int u)
 {
+    // left -> right -> root
     if (u)
     {
         houxu(lch[u]);
@@ -78,14 +81,25 @@ void houxu(int u)
 }
 int main()
 {
-    scanf("%s", s);
+    //scanf("%s", s);
+    strcpy(s, "2*(3-1)+4*(2+5)-1#");
+    printf("intput:%s\n", s);
     int len = strlen(s);
     int u = build(s, 0, len - 1);
+
+#if 0
     qianxu(u);
     printf("\n");
+#endif
+
+#if 0
     zhongxu(u);
     printf("\n");
+#endif
+
+#if 1
     houxu(u);
     printf("\n");
+#endif
     return 0;
 }
