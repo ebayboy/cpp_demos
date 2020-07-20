@@ -82,7 +82,7 @@ void houxu(int u)
 int main()
 {
     //scanf("%s", s);
-    strcpy(s, "2*(3-1)+4*(2+5)-1#");
+    strcpy(s, "3*(1+2)-2*(1+3)-4#");
     printf("intput:%s\n", s);
     int len = strlen(s);
     int u = build(s, 0, len - 1);
