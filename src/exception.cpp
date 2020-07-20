@@ -19,10 +19,6 @@ public:
     }
     void SetAge(int age)
     {
-        if (age < 0) {
-            CExce
-            throw("")
-        }
         this->age = age;
     }
 
