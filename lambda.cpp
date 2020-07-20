@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -25,6 +26,10 @@ int main(int args, char **argv)
     for_each(b, b + 4, [&](int &x) -> void { total +=x; x*=2; });
     for_each(b, b + 4, [=](int x) -> void { cout << x << endl; });
     cout << "total:" << total << endl;
+
+    vector<string> v ={"111", "222", "333"};
+
+    for_each(v.begin(),v.end(), [&](string x) -> void{ cout << x << endl;} );
 
     return 0;
 }
