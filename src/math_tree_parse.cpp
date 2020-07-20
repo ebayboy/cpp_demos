@@ -47,6 +47,7 @@ int build(char *s, int x, int y) //x表示字符串的起始地址，y表示结�
     lch[u] = build(s, x, c1);     //左子树为[x，c1]；
     rch[u] = build(s, c1 + 1, y); //右子树为[c1+1，y]；
     op[u] = s[c1];
+    printf("u:%d op:%c lch:%d rch:%d\n", u, op[u],lch[u], rch[u]);
     return u;
 }
 void qianxu(int u)
@@ -72,11 +73,12 @@ void zhongxu(int u)
 void houxu(int u)
 {
     // left -> right -> root
+    printf("%s:u:%d\n", __func__, u);
     if (u)
     {
         houxu(lch[u]);
         houxu(rch[u]);
-        printf("%c", op[u]);
+        printf("%c\n", op[u]);
     }
 }
 int main()
@@ -86,6 +88,7 @@ int main()
     printf("intput:%s\n", s);
     int len = strlen(s);
     int u = build(s, 0, len - 1);
+    printf("main u:%d\n", u);
 
 #if 0
     qianxu(u);
