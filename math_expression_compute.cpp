@@ -38,7 +38,7 @@ O |
 #include <math.h>
 
 using namespace std;
-stack<double> S; //存放操作符
+stack<double> S; //存放操作数op1 op2
 
 double strTodata(string data)
 {
@@ -81,10 +81,11 @@ bool Isopera(char x) //操作符判断
         return false;
 }
 
+//Pre order -> Post Order
 string PreToPost(string exp)
 {
     string result;
-    stack<char> optr; //存放操作数
+    stack<char> optr; //存放操作符  +-*/()
 
     for (int i = 0; i < exp.size(); i++)
     {
@@ -127,6 +128,7 @@ string PreToPost(string exp)
 
     return result;
 }
+
 double Calculate(double op1, double op2, char oper)
 {
     switch (oper)
@@ -147,7 +149,7 @@ int main()
 {
     string str = "2*(1+3)-5", sub_str;
 
-    cout << "InOrder:" << str << endl;
+    cout << "PreOrder:" << str << endl;
 
     str = PreToPost(str);
     cout << "PostOrder:" << str << endl;
@@ -183,7 +185,6 @@ int main()
     }
 
     cout << "final_resl:" << final_resl << endl;
-
 
     return 0;
 }
