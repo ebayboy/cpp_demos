@@ -27,8 +27,6 @@ public:
     void InOrder();
     void PreOrder();
     void InsertNode(int val);
-    void RemoveNode(int val);
-    void RemoveAll(int val);
     BNode *FindNode(int key);
 
 private:
@@ -37,7 +35,6 @@ private:
     void __PreOrder(BNode *proot);
     BNode *__InsertNode(BNode *proot, int val);
     BNode *__FindNode(BNode *proot, int key);
-    void __RemoveNode(BNode *proot, int val);
 
     BNode *m_root;
     size_t m_size;
@@ -164,15 +161,6 @@ BNode *BTree::__FindNode(BNode *proot, int key)
 BNode *BTree::FindNode(int key)
 {
     return __FindNode(m_root, key);
-}
-
-void BTree::__RemoveNode(BNode *proot, int val)
-{
-}
-
-void BTree::RemoveNode(int val)
-{
-    __RemoveNode(m_root, val);
 }
 
 int main(int args, char **argv)

@@ -1,11 +1,6 @@
-#if 0
 #include <iostream>
 #include <string>
 #include <vector>
-#else
-#include <bits/stdc++.h>
-
-#endif
 
 using namespace std;
 
@@ -18,7 +13,6 @@ struct Stu
 };
 
 void test(Stu *&s)
-{
 {
     if (s == nullptr)
     {
