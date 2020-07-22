@@ -2,35 +2,23 @@
 1. 基于二叉树
 
 2. 基于堆栈
-使用两个栈 O 和 N， 一个存算符， 一个存操作数， 根据算符优先级出入栈。
-
-线性扫描表达式， 比较当前算符 和栈顶算符的优先级（还要考虑结合性），如果后者优先级高， 则从数值栈顶取出元素并计算，然后把返回值入栈。 
-否则 操作符/操作数依次入栈
-
-实例: 计算 1*2+3 具体过程
-依次入栈
-push 1; push *; push 2     
-此时栈内元素如下, 下一个算符为'+'
-N |1|2| 
-O |*|
-由于栈顶端算符为*, 优先级高于+, 所以先计算*， 从数值栈顶取出两个操作数1和2， 相乘得返回值2，入栈
-pop 1; pop 2; pop *; push 1*2
-N |2| 
-O |
-然后再处理后面的‘+’
-N |2|3| 
-O |+|
--->
-N |5| 
-O |
-
-大致思路如上述
-
-3. 实现  
-1. 实现一个函数 tokenize  把表达式拆解为一个一个独立的token  忽略空格等
-此处的token指 数值/算符/变量
-2. 实现一个函数evaluate 根据上述原理扫描已经过预处理的token序列， 实现计算。
-3.对左值的处理也考虑了， 具体见源码。
+Pre order -> Post Order
+PreOrder:5*(2+3-4)-1
+PostOrder:5 2 3 4 - + * 1 -
+2*(1+3)-5  -> 2 1 3 + * 5 -
+result:
+result  operator_stack 
+5 *
+5 *(
+52 *(
+52 *(+
+523 *(+
+523 *(+-
+5234 *(+-  因为top +和比较的-为同一优先级， 不输出操作符
+5234-+ * 
+5234-+* -
+5234-+*1 -
+5234-+*1-
 */
 #include <iostream>
 #include <string>
@@ -61,15 +49,33 @@ bool IsOpera(char x) //操作符判断
 }
 
 //Pre order -> Post Order
+//PreOrder:5*(2+3-4)-1
+//PostOrder:5 2 3 4 - + * 1 -
+//2*(1+3)-5  -> 2 1 3 + * 5 -
+//result:
+// result  operator_stack 
+// 5 *
+// 5 *(
+// 52 *(
+// 52 *(+
+// 523 *(+
+// 523 *(+-
+// 5234 *(+-
+// 5234-+ * 
+// 5234-+* -
+// 5234-+*1 -
+// 5234-+*1-
 string PreToPost(string exp)
 {
-    string result;
+    string result;   //保存输出后缀表达式
     stack<char> optr; //存放操作符  +-*/()
 
     for (int i = 0; i < exp.size(); i++)
     {
         if (exp[i] == '(')
-            optr.push(exp[i]);
+        {
+            optr.push(exp[i]);   //top (
+        }
         else if (exp[i] == ')')
         {
             while (optr.top() != '(')
@@ -82,6 +88,8 @@ string PreToPost(string exp)
         }
         else if (exp[i] == '+' || exp[i] == '-' || exp[i] == '*' || exp[i] == '/')
         {
+            //eg. (2*3+4）-> 23*4+
+            //eg. (2+3-4）-> 23+4-
             while (!optr.empty() && optr.top() != '(' && Prior(optr.top(), exp[i]))
             {
                 result += optr.top();
@@ -93,8 +101,10 @@ string PreToPost(string exp)
         else
         {
             result += exp[i];
-            if (IsOpera(exp[i + 1]) || exp[i + 1] == '\0')
+            if (IsOpera(exp[i + 1]) || exp[i + 1] == '\0')  //next is operator or end
+            {
                 result += " ";
+            }
         }
     }
 
@@ -125,9 +135,14 @@ double Calculate(double op1, double op2, char oper)
     return 0;
 }
 
+/*
+PreOrder:5*(2+3-4)-1
+PostOrder:5 2 3 4 - + * 1 -
+final_resl:3
+*/
 int main()
 {
-    string str = "2.21*(1.11+3.22)-5.0", sub_str;
+    string str = "5*(2+3-4)-1", sub_str;
 
     cout << "PreOrder:" << str << endl;
 
