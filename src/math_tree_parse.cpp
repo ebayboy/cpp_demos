@@ -1,3 +1,7 @@
+/* build 后缀表达式 二叉树
+    build postorder expression by binary tree 
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
