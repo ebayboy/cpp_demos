@@ -145,8 +145,13 @@ double Calculate(double op1, double op2, char oper)
 }
 int main()
 {
-    string str = "(1.3+2.2)*3", sub_str;
+    string str = "2*(1+3)-5", sub_str;
+
+    cout << "InOrder:" << str << endl;
+
     str = PreToPost(str);
+    cout << "PostOrder:" << str << endl;
+
     double op1, op2, final_resl;
     int i = 0;
 
@@ -175,7 +180,10 @@ int main()
             S.push(final_resl);
             i += 2;
         }
-        cout << S.top() << endl;
     }
+
+    cout << "final_resl:" << final_resl << endl;
+
+
     return 0;
 }
