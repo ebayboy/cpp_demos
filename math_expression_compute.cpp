@@ -20,6 +20,8 @@ result  operator_stack
 5234-+*1 -
 5234-+*1-
 */
+
+
 #include <iostream>
 #include <string>
 #include <stack>
@@ -53,7 +55,7 @@ bool IsOpera(char x) //操作符判断
 //PostOrder:5 2 3 4 - + * 1 -
 //2*(1+3)-5  -> 2 1 3 + * 5 -
 //result:
-// result  operator_stack 
+// result  operator_stack
 // 5 *
 // 5 *(
 // 52 *(
@@ -61,20 +63,20 @@ bool IsOpera(char x) //操作符判断
 // 523 *(+
 // 523 *(+-
 // 5234 *(+-
-// 5234-+ * 
+// 5234-+ *
 // 5234-+* -
 // 5234-+*1 -
 // 5234-+*1-
 string PreToPost(string exp)
 {
-    string result;   //保存输出后缀表达式
+    string result;    //保存输出后缀表达式
     stack<char> optr; //存放操作符  +-*/()
 
     for (int i = 0; i < exp.size(); i++)
     {
         if (exp[i] == '(')
         {
-            optr.push(exp[i]);   //top (
+            optr.push(exp[i]); //top (
         }
         else if (exp[i] == ')')
         {
@@ -101,7 +103,7 @@ string PreToPost(string exp)
         else
         {
             result += exp[i];
-            if (IsOpera(exp[i + 1]) || exp[i + 1] == '\0')  //next is operator or end
+            if (IsOpera(exp[i + 1]) || exp[i + 1] == '\0') //next is operator or end
             {
                 result += " ";
             }
@@ -135,17 +137,11 @@ double Calculate(double op1, double op2, char oper)
     return 0;
 }
 
-/*
-PreOrder:5*(2+3-4)-1
-PostOrder:5 2 3 4 - + * 1 -
-final_resl:3
-*/
-int main()
+double ExpressionCal(string str)
 {
-    string str = "5*(2+3-4)-1", sub_str;
+    string sub_str;
 
     cout << "PreOrder:" << str << endl;
-
     str = PreToPost(str);
     cout << "PostOrder:" << str << endl;
 
@@ -178,6 +174,19 @@ int main()
             i += 2;
         }
     }
+
+    return final_resl;
+}
+/*
+PreOrder:5*(2+3-4)-1
+PostOrder:5 2 3 4 - + * 1 -
+final_resl:3
+*/
+int main()
+{
+    string str = "5*(2+3-4)-1";
+
+    double final_resl = ExpressionCal(str);
 
     cout << "final_resl:" << final_resl << endl;
 
