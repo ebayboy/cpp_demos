@@ -21,7 +21,6 @@ result  operator_stack
 5234-+*1-
 */
 
-
 #include <iostream>
 #include <string>
 #include <stack>
@@ -29,10 +28,24 @@ result  operator_stack
 
 using namespace std;
 
-stack<double> S; //存放操作数op1 op2
+class MathExpCal
+{
+public:
+    MathExpCal(){};
+    ~MathExpCal(){};
+    double ExpressionCal(string str);
 
-//Check if op1 priority > op2 priority
-bool Prior(char op1, char op2)
+protected:
+    bool Prior(char op1, char op2);
+    bool IsOpera(char x);
+    string PreToPost(string exp);
+    double Calculate(double op1, double op2, char oper);
+
+private:
+    stack<double> S; //存放操作数op1 op2
+};
+
+bool MathExpCal::Prior(char op1, char op2)
 {
     if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-'))
     {
@@ -42,7 +55,7 @@ bool Prior(char op1, char op2)
     return false;
 }
 
-bool IsOpera(char x) //操作符判断
+bool MathExpCal::IsOpera(char x) //操作符判断
 {
     if (x == '+' || x == '-' || x == '*' || x == '/' || x == '(' || x == ')')
         return true;
@@ -50,24 +63,7 @@ bool IsOpera(char x) //操作符判断
         return false;
 }
 
-//Pre order -> Post Order
-//PreOrder:5*(2+3-4)-1
-//PostOrder:5 2 3 4 - + * 1 -
-//2*(1+3)-5  -> 2 1 3 + * 5 -
-//result:
-// result  operator_stack
-// 5 *
-// 5 *(
-// 52 *(
-// 52 *(+
-// 523 *(+
-// 523 *(+-
-// 5234 *(+-
-// 5234-+ *
-// 5234-+* -
-// 5234-+*1 -
-// 5234-+*1-
-string PreToPost(string exp)
+string MathExpCal::PreToPost(string exp)
 {
     string result;    //保存输出后缀表达式
     stack<char> optr; //存放操作符  +-*/()
@@ -76,7 +72,7 @@ string PreToPost(string exp)
     {
         if (exp[i] == '(')
         {
-            optr.push(exp[i]); //top (
+            optr.push(exp[i]); 
         }
         else if (exp[i] == ')')
         {
@@ -90,8 +86,6 @@ string PreToPost(string exp)
         }
         else if (exp[i] == '+' || exp[i] == '-' || exp[i] == '*' || exp[i] == '/')
         {
-            //eg. (2*3+4）-> 23*4+
-            //eg. (2+3-4）-> 23+4-
             while (!optr.empty() && optr.top() != '(' && Prior(optr.top(), exp[i]))
             {
                 result += optr.top();
@@ -120,7 +114,7 @@ string PreToPost(string exp)
     return result;
 }
 
-double Calculate(double op1, double op2, char oper)
+double MathExpCal::Calculate(double op1, double op2, char oper)
 {
     switch (oper)
     {
@@ -137,14 +131,16 @@ double Calculate(double op1, double op2, char oper)
     return 0;
 }
 
-double ExpressionCal(string str)
+double MathExpCal::ExpressionCal(string str)
 {
     string sub_str;
 
-    cout << "PreOrder:" << str << endl;
-    str = PreToPost(str);
-    cout << "PostOrder:" << str << endl;
+    if (str.length() == 0)
+    {
+        throw std::invalid_argument("Error: str.length == 0");
+    }
 
+    str = PreToPost(str);
     double op1, op2, final_resl;
     int i = 0;
 
@@ -177,6 +173,7 @@ double ExpressionCal(string str)
 
     return final_resl;
 }
+
 /*
 PreOrder:5*(2+3-4)-1
 PostOrder:5 2 3 4 - + * 1 -
@@ -185,10 +182,17 @@ final_resl:3
 int main()
 {
     string str = "5*(2+3-4)-1";
-
-    double final_resl = ExpressionCal(str);
-
-    cout << "final_resl:" << final_resl << endl;
+    MathExpCal m;
+    double final_resl = 0;
+    try
+    {
+        final_resl = m.ExpressionCal(str);
+        cout << "final_resl:" << final_resl << endl;
+    }
+    catch (exception &ex)
+    {
+        cout << ex.what() << endl;
+    }
 
     return 0;
 }
