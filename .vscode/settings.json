@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "typeinfo": "cpp",
-        "stack": "cpp"
+        "unordered_map": "cpp"
     },
     "code-runner.runInTerminal": true,
     "C_Cpp.default.cppStandard": "c++11",

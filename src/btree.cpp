@@ -1,5 +1,5 @@
 /*
-    btree.cpp
+    BinaryTree.cpp
 */
 #include <iostream>
 #include <string>
@@ -7,59 +7,59 @@
 
 using namespace std;
 
-struct BNode
+struct BinaryNode
 {
     int data;
-    BNode *left;
-    BNode *right;
+    BinaryNode *left;
+    BinaryNode *right;
 
     //struct constructor
-    BNode() : data(0), left(nullptr), right(nullptr){};
+    BinaryNode() : data(0), left(nullptr), right(nullptr){};
 };
 
-class BTree
+class BinaryTree
 {
 public:
-    BTree();
-    ~BTree();
+    BinaryTree();
+    ~BinaryTree();
 
     void PostOrder();
     void InOrder();
     void PreOrder();
     void InsertNode(int val);
-    BNode *FindNode(int key);
+    BinaryNode *FindNode(int key);
 
 private:
-    void __PostOrder(BNode *proot);
-    void __InOrder(BNode *proot);
-    void __PreOrder(BNode *proot);
-    BNode *__InsertNode(BNode *proot, int val);
-    BNode *__FindNode(BNode *proot, int key);
+    void __PostOrder(BinaryNode *proot);
+    void __InOrder(BinaryNode *proot);
+    void __PreOrder(BinaryNode *proot);
+    BinaryNode *__InsertNode(BinaryNode *proot, int val);
+    BinaryNode *__FindNode(BinaryNode *proot, int key);
 
-    BNode *m_root;
+    BinaryNode *m_root;
     size_t m_size;
 };
 
-BTree::BTree() : m_root(nullptr), m_size(0)
+BinaryTree::BinaryTree() : m_root(nullptr), m_size(0)
 {
 }
 
-BTree::~BTree()
+BinaryTree::~BinaryTree()
 {
 }
 
-void BTree::InsertNode(int val)
+void BinaryTree::InsertNode(int val)
 {
     m_root = __InsertNode(m_root, val);
 }
 
-BNode *BTree::__InsertNode(BNode *proot, int val)
+BinaryNode *BinaryTree::__InsertNode(BinaryNode *proot, int val)
 {
     //find null node
     if (proot == nullptr)
     {
         //new 不初始化， new()进行初始化
-        BNode *node = new BNode();
+        BinaryNode *node = new BinaryNode();
         if (node != nullptr)
         {
             node->data = val;
@@ -83,7 +83,7 @@ BNode *BTree::__InsertNode(BNode *proot, int val)
     return proot;
 }
 
-void BTree::__PostOrder(BNode *proot)
+void BinaryTree::__PostOrder(BinaryNode *proot)
 {
     if (proot == nullptr)
     {
@@ -96,13 +96,13 @@ void BTree::__PostOrder(BNode *proot)
     cout << " " << proot->data;
 }
 
-void BTree::PostOrder()
+void BinaryTree::PostOrder()
 {
     __PostOrder(m_root);
     cout << endl;
 }
 
-void BTree::__InOrder(BNode *proot)
+void BinaryTree::__InOrder(BinaryNode *proot)
 {
     if (proot == nullptr)
     {
@@ -114,13 +114,13 @@ void BTree::__InOrder(BNode *proot)
     __InOrder(proot->right);
 }
 
-void BTree::InOrder()
+void BinaryTree::InOrder()
 {
     __InOrder(m_root);
     cout << endl;
 }
 
-void BTree::__PreOrder(BNode *proot)
+void BinaryTree::__PreOrder(BinaryNode *proot)
 {
     if (proot == nullptr)
     {
@@ -132,13 +132,13 @@ void BTree::__PreOrder(BNode *proot)
     __PreOrder(proot->right);
 }
 
-void BTree::PreOrder()
+void BinaryTree::PreOrder()
 {
     __PreOrder(m_root);
     cout << endl;
 }
 
-BNode *BTree::__FindNode(BNode *proot, int key)
+BinaryNode *BinaryTree::__FindNode(BinaryNode *proot, int key)
 {
     if (proot == NULL)
     {
@@ -158,7 +158,7 @@ BNode *BTree::__FindNode(BNode *proot, int key)
     return proot;
 }
 
-BNode *BTree::FindNode(int key)
+BinaryNode *BinaryTree::FindNode(int key)
 {
     return __FindNode(m_root, key);
 }
@@ -166,7 +166,7 @@ BNode *BTree::FindNode(int key)
 int main(int args, char **argv)
 {
     int a[5] = {4, 3, 5, 2, 1};
-    BTree b;
+    BinaryTree b;
 
     for (size_t i = 0; i < sizeof(a) / sizeof(int); i++)
     {
@@ -182,7 +182,7 @@ int main(int args, char **argv)
     cout << "PostOrder:" << endl;
     b.PostOrder();
 
-    BNode *n = b.FindNode(3);
+    BinaryNode *n = b.FindNode(3);
     if (n)
     {
         cout << "n:" << n->data;
