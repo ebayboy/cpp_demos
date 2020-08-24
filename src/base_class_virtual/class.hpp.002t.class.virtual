@@ -1,0 +1,28 @@
+Vtable for Base
+Base::_ZTV4Base: 4u entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI4Base)
+16    (int (*)(...))Base::~Base
+24    (int (*)(...))Base::~Base
+
+Class Base
+   size=16 align=8
+   base size=16 base align=8
+Base (0x0x7fb6f87a3d80) 0
+    vptr=((& Base::_ZTV4Base) + 16u)
+
+Vtable for Inherit
+Inherit::_ZTV7Inherit: 4u entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI7Inherit)
+16    (int (*)(...))Inherit::~Inherit
+24    (int (*)(...))Inherit::~Inherit
+
+Class Inherit
+   size=24 align=8
+   base size=24 base align=8
+Inherit (0x0x7fb6f85fa2d8) 0
+    vptr=((& Inherit::_ZTV7Inherit) + 16u)
+  Base (0x0x7fb6f87a3de0) 0
+      primary-for Inherit (0x0x7fb6f85fa2d8)
+
