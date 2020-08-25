@@ -1,0 +1,65 @@
+
+libtest.so：     文件格式 elf64-x86-64
+
+SYMBOL TABLE:
+0000000000000238 l    d  .note.gnu.build-id	0000000000000000              .note.gnu.build-id
+0000000000000260 l    d  .gnu.hash	0000000000000000              .gnu.hash
+0000000000000298 l    d  .dynsym	0000000000000000              .dynsym
+0000000000000448 l    d  .dynstr	0000000000000000              .dynstr
+0000000000000620 l    d  .gnu.version	0000000000000000              .gnu.version
+0000000000000648 l    d  .gnu.version_r	0000000000000000              .gnu.version_r
+0000000000000698 l    d  .rela.dyn	0000000000000000              .rela.dyn
+0000000000000788 l    d  .rela.plt	0000000000000000              .rela.plt
+0000000000001000 l    d  .init	0000000000000000              .init
+0000000000001020 l    d  .plt	0000000000000000              .plt
+00000000000010b0 l    d  .text	0000000000000000              .text
+00000000000012f8 l    d  .fini	0000000000000000              .fini
+0000000000002000 l    d  .rodata	0000000000000000              .rodata
+000000000000202c l    d  .eh_frame_hdr	0000000000000000              .eh_frame_hdr
+0000000000002060 l    d  .eh_frame	0000000000000000              .eh_frame
+0000000000003dc0 l    d  .init_array	0000000000000000              .init_array
+0000000000003dd0 l    d  .fini_array	0000000000000000              .fini_array
+0000000000003dd8 l    d  .data.rel.ro	0000000000000000              .data.rel.ro
+0000000000003de0 l    d  .dynamic	0000000000000000              .dynamic
+0000000000003fd0 l    d  .got	0000000000000000              .got
+0000000000004000 l    d  .got.plt	0000000000000000              .got.plt
+0000000000004058 l    d  .bss	0000000000000000              .bss
+0000000000000000 l    d  .comment	0000000000000000              .comment
+0000000000000000 l    df *ABS*	0000000000000000              lib.cpp
+00000000000010b0 l     F .text	000000000000002e              _GLOBAL__sub_I_lib.cpp
+0000000000004059 l     O .bss	0000000000000001              _ZStL8__ioinit
+0000000000000000 l    df *ABS*	0000000000000000              crtstuff.c
+00000000000010e0 l     F .text	0000000000000000              deregister_tm_clones
+0000000000001110 l     F .text	0000000000000000              register_tm_clones
+0000000000001150 l     F .text	0000000000000000              __do_global_dtors_aux
+0000000000004058 l     O .bss	0000000000000001              completed.7326
+0000000000003dd0 l     O .fini_array	0000000000000000              __do_global_dtors_aux_fini_array_entry
+0000000000001190 l     F .text	0000000000000000              frame_dummy
+0000000000003dc0 l     O .init_array	0000000000000000              __frame_dummy_init_array_entry
+0000000000000000 l    df *ABS*	0000000000000000              crtstuff.c
+0000000000002148 l     O .eh_frame	0000000000000000              __FRAME_END__
+0000000000000000 l    df *ABS*	0000000000000000              
+000000000000202c l       .eh_frame_hdr	0000000000000000              __GNU_EH_FRAME_HDR
+0000000000003dd8 l     O .data.rel.ro	0000000000000000              __dso_handle
+0000000000003de0 l     O .dynamic	0000000000000000              _DYNAMIC
+0000000000004058 l     O .got.plt	0000000000000000              __TMC_END__
+0000000000004000 l     O .got.plt	0000000000000000              _GLOBAL_OFFSET_TABLE_
+0000000000000000  w    F *UND*	0000000000000000              __cxa_finalize@@GLIBC_2.2.5
+0000000000000000       F *UND*	0000000000000000              strlen@@GLIBC_2.2.5
+0000000000001280 g     F .text	0000000000000078              _Z9print_strPc
+00000000000012f8 g     F .fini	0000000000000000              _fini
+0000000000000000       F *UND*	0000000000000000              __cxa_atexit@@GLIBC_2.2.5
+0000000000001000 g     F .init	0000000000000000              _init
+0000000000000000       F *UND*	0000000000000000              _ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l@@GLIBCXX_3.4.9
+0000000000000000       O *UND*	0000000000000000              _ZSt4cout@@GLIBCXX_3.4
+0000000000000000       F *UND*	0000000000000000              _ZNSt8ios_base4InitC1Ev@@GLIBCXX_3.4
+0000000000000000       F *UND*	0000000000000000              _ZNSt9basic_iosIcSt11char_traitsIcEE5clearESt12_Ios_Iostate@@GLIBCXX_3.4
+0000000000000000       F *UND*	0000000000000000              _ZNSolsEi@@GLIBCXX_3.4
+0000000000000000  w      *UND*	0000000000000000              _ITM_deregisterTMCloneTable
+0000000000001230 g     F .text	0000000000000049              _Z9print_inti
+0000000000000000  w      *UND*	0000000000000000              __gmon_start__
+0000000000000000  w      *UND*	0000000000000000              _ITM_registerTMCloneTable
+00000000000011a0 g     F .text	000000000000008c              _Z9print_vecRKSt6vectorIiSaIiEE
+0000000000000000       F *UND*	0000000000000000              _ZNSt8ios_base4InitD1Ev@@GLIBCXX_3.4
+
+
