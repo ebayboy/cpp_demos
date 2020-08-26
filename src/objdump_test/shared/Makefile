@@ -9,7 +9,7 @@ INCLUDE := -I.
 LIBS	:= -L.
 
 LDFLAGS := -shared
-CFLAGS	:= -fPIC -std=c++17 -Wall $(DEFINES) $(INCLUDE)
+CFLAGS	:= -fPIC -Wall $(DEFINES) $(INCLUDE)
 
 DEBUG=n
 CONV=n
@@ -17,7 +17,7 @@ CONV=n
 ifeq ($(DEBUG),y)
 	CFLAGS += -g2 -O0
 else
-	CFLAGS += -O3
+	CFLAGS += -O2
 endif
 
 ifeq ($(CONV),y)

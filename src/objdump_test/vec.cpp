@@ -20,6 +20,7 @@ int main()
 
   print_vec(vec);
   print_int(vec.size());
+	print_core();
   print_str((char *)"hello world!");
 
   int f_in = func_in_main(5);

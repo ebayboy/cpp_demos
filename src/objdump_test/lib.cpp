@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 void print_vec(const std::vector<int>& vec)
 {
@@ -21,4 +22,11 @@ void print_str(char* str)
   std::cout<<"print_str : " << str << "\n";
 }
 
+void print_core()
+{
+  int *ptr = NULL;
+  *ptr = 0;
+
+  std::cout << ptr << std::endl;
+}
 
