@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "typeinfo": "cpp",
-        "iostream": "cpp"
+        "functional": "cpp"
     },
     "code-runner.runInTerminal": true,
     "C_Cpp.default.cppStandard": "c++11",
@@ -11,7 +11,7 @@
     "files.associations": {
         "typeinfo": "cpp"
     },
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "cmake.configureOnOpen": false,
 }
