@@ -1,56 +1,46 @@
-
-#include <iostream>
-#include <string>
-
-
-#ifndef _WIN32_WINNT
-#include <thread>
-#else
-#include "lib/mingw-std-threads/mingw.thread.h"
-#endif
+// thread example
+#include <iostream> // std::cout
+#include <thread>   // std::thread
+#include <chrono>   //for time
+#include <exception>
+#include <vector>
 
 using namespace std;
 
-//linux build: g++ thread.cpp -std=c++11  -lpthread
-//mingw build: g++ test.cpp -o test.exe -std=c++11 -D _WIN32_WINNT=0x0601
-
-// 线程1的线程函数
-void threadProc1()
+void foo()
 {
-	cout << "thread-1 run begin!" << endl;
-	// 线程1睡眠2秒
-	std::this_thread::sleep_for(std::chrono::seconds(2));
-	cout << "thread-1 2秒唤醒，run end!" << endl;
+  this_thread::sleep_for(chrono::seconds(1));
+  cout << "foo" << endl;
 }
 
-// 线程2的线程函数
-void threadProc2(int val, string info)
+void bar(int x)
 {
-
-	cout << "thread-2 run begin!" << endl;
-
-	cout << "thread-2 args[val:" << val << ",info:" << info << "]" << endl;
-
-	// 线程2睡眠4秒
-	std::this_thread::sleep_for(std::chrono::seconds(4));
-
-	cout << "thread-2 4秒唤醒，run end!" << endl;
+  cout << "bar x:" << x << endl;
 }
 
 int main()
 {
-	cout << "main thread begin!" << endl;
+  try
+  {
+    std::vector<thread> tpool;
 
-	// 创建thread线程对象，传入线程函数和参数，线程直接启动运行
-	thread t(threadProc1);
+    tpool.emplace_back(foo);
+    thread &t1 = tpool.back();
+    t1.join();
+  
+    tpool.emplace_back(bar, 3);
+    thread &t2 = tpool.back();
+    t2.detach();
 
-	thread t1(threadProc2, 20, "hello world");
+    this_thread::sleep_for(chrono::seconds(3));
+  }
+  catch (exception &ex)
+  {
+    cout << "ex:" << ex.what() << endl;
+  }
 
-	// 等待线程t和t1执行完，main线程再继续运行
-	t.join();
-	t1.join();
+  std::cout << "foo and bar completed.\n";
 
-	cout << "main thread end!" << endl;
-
-	return 0;
+  return 0;
 }
+

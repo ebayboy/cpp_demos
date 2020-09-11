@@ -1,0 +1,11 @@
+Class Base
+   size=8 align=8
+   base size=8 base align=8
+Base (0x0x7f8d06521d80) 0
+
+Class Inherit
+   size=16 align=8
+   base size=16 base align=8
+Inherit (0x0x7f8d063782d8) 0
+  Base (0x0x7f8d06521de0) 0
+
