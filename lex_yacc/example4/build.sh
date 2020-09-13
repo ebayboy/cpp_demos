@@ -1,4 +1,3 @@
-i
 #!/bin/bash -
 #===============================================================================
 #
@@ -18,7 +17,12 @@ i
 #      REVISION:  ---
 #===============================================================================
 
-set -o nounset                                  # Treat unset variables as an error
+if [ "$1" == "clean" ]; then
+	echo "clean..."
+	rm  -rf y.tab.h.gch token.tab.c  lex.yy.c
+	exit 1
+fi
+echo "build..."
 
 flex token.l
 
@@ -34,4 +38,3 @@ token.tab.c
 gcc *
 
 #会得到文件 a.out
-#rm  -rf y.tab.h.gch token.tab.c  lex.yy.c
