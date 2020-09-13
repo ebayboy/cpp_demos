@@ -1,0 +1,12 @@
+总用量 72
+-rw-r--r--. 1 root root     0 8月  25 13:41 re.txt
+-rw-r--r--. 1 root root    33 8月  25 13:39 1.txt
+-rw-r--r--. 1 root root     0 8月  25 13:36 1
+-rwxr-xr-x. 1 root root 17408 8月  25 13:34 test_so
+-rwxr-xr-x. 1 root root 18176 8月  25 13:33 libtest.so
+-rw-r--r--. 1 root root  7568 8月  25 13:33 vec.o
+-rw-r--r--. 1 root root  4008 8月  25 13:33 lib.o
+-rw-r--r--. 1 root root   183 8月  25 13:33 lib.h
+-rw-r--r--. 1 root root   502 8月  25 13:33 lib.cpp
+-rw-r--r--. 1 root root   480 8月  25 13:32 vec.cpp
+-rw-r--r--. 1 root root   825 8月  25 12:16 Makefile

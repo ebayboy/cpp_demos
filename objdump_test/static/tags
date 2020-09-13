@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AR	Makefile	/^AR		:= ar$/;"	m
+CC	Makefile	/^CC		:= g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS	:= -std=c++17	-Wall $(DEFINES) $(INCLUDE)$/;"	m
+CONV	Makefile	/^CONV=n$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS:= $(CFLAGS) -DHAVE_CONFIG_H$/;"	m
+DEBUG	Makefile	/^DEBUG=n$/;"	m
+DEFINES	Makefile	/^DEFINES :=$/;"	m
+INCLUDE	Makefile	/^INCLUDE := -I.$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS := $/;"	m
+LIBS	Makefile	/^LIBS	:= -L.$/;"	m
+OBJS	Makefile	/^OBJS	:= $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCE)))$/;"	m
+RANLIB	Makefile	/^RANLIB	:= ranlib$/;"	m
+SOURCE	Makefile	/^SOURCE	:= $(wildcard *.c) $(wildcard *.cpp)$/;"	m
+TARGET	Makefile	/^TARGET := libtest.a$/;"	m
+__LIB_H__	lib.h	3;"	d
+func_in_main	vec.cpp	/^int func_in_main(int a)$/;"	f
+main	vec.cpp	/^int main()$/;"	f
+print_core	lib.cpp	/^void print_core()$/;"	f
+print_int	lib.cpp	/^void print_int(int i)$/;"	f
+print_str	lib.cpp	/^void print_str(char* str)$/;"	f
+print_vec	lib.cpp	/^void print_vec(const std::vector<int>& vec)$/;"	f
