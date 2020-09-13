@@ -34,4 +34,4 @@ token.tab.c
 gcc *
 
 #会得到文件 a.out
-rm  -rf y.tab.h.gch token.tab.c  lex.yy.c
+#rm  -rf y.tab.h.gch token.tab.c  lex.yy.c
