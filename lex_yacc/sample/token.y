@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 %}
  
 %token DIGIT LOWERCASELETTER UPPERCASELETTER OTHER STOP
@@ -17,7 +18,7 @@ something : DIGIT {printf("DIGIT\n");}
     ;
 %%
  
-main()
+int main()
 {
     // Intro
     printf("Type something followed by Return. Type 'q' or 'Q' to end.\n");
@@ -26,13 +27,13 @@ main()
     return(yyparse());
 }
  
-yyerror(s)
+int yyerror(s)
 char *s;
 {
     printf("yacc error: %s\n", s);
 }
  
-yywrap()
+int yywrap()
 {
     return(0);
 }
