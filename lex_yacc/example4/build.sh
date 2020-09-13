@@ -29,7 +29,7 @@ flex token.l
 #会得到文件：lex.yy.c
 
 #运行命令：
-bison token.y
+bison -t -v -d token.y 
 
 #运行命令：
 cc *.c

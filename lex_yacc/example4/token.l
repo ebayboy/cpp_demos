@@ -1,11 +1,12 @@
 %{
-#include "y.tab.h"
+#include "token.tab.h"
 %}
 %%
-"q"   return STOP;
-"Q"   return STOP;
-[0-9] return DIGIT;
-[a-z] return LOWERCASELETTER;
-[A-Z] return UPPERCASELETTER;
-.     return OTHER;
+[0-9]+         return NUMBER;
+heat           return TOKHEAT;
+on|off         return STATE;
+target         return TOKTARGET;
+temperature    return TOKTEMPERATURE;
+\n             /* ignore end of line */;
+[ \t ]+         /* ignore whitespace */
 %%

@@ -3,18 +3,18 @@
 #include <stdlib.h>
 %}
  
-%token DIGIT LOWERCASELETTER UPPERCASELETTER OTHER STOP
+%token NUMBER TOKHEAT STATE TOKTARGET TOKTEMPERATURE
  
 %%
 start :
     | start something
     ;
  
-something : DIGIT {printf("DIGIT\n");}
-    | LOWERCASELETTER {printf("LOWERCASELETTER\n");}
-    | UPPERCASELETTER {printf("UPPERCASELETTER\n");}
-    | OTHER {printf("OTHER\n");}
-    | STOP {exit(0);}
+something : NUMBER {printf("NUMBER\n");}
+    | TOKHEAT {printf("TOKHEAT\n");}
+    | STATE {printf("STATE\n");}
+    | TOKTARGET {printf("TOKTARGET\n");}
+    | TOKTEMPERATURE {printf("TOKTEMPERATURE\n");}
     ;
 %%
  
