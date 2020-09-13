@@ -31,10 +31,7 @@ flex token.l
 #运行命令：
 bison token.y
 
-#会得到文件： 
-token.tab.c
-
 #运行命令：
-gcc *
+cc *.c
 
 #会得到文件 a.out
