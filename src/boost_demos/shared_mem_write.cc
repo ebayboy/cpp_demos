@@ -31,6 +31,7 @@ using namespace std;
 //注意：在进程退出后依然可以读取共享内存...
 int main()
 {
+    boost::interprocess::shared_memory_object::remove("Highscore"); // 创建前需要先删除，否则可能会存在问题
 	boost::interprocess::shared_memory_object shdmem(boost::interprocess::open_or_create, "Highscore", boost::interprocess::read_write, 1024); 
     //shdmem.truncate(1024); //set size
 	boost::interprocess::mapped_region region(shdmem, boost::interprocess::read_write); //mapped
